@@ -66,7 +66,9 @@ class Over < GameComponents
     @non_striker = current_batter_2
     @over_id = over_id
     @delivery
+    show_over
     run_over
+    show_over_summary
   end
 
   def run_over
@@ -98,6 +100,8 @@ class Delivery < GameComponents
     @facing_batsman = facing_batsman
     @non_striker = non_striker
     is_hit
+    facing
+    show_ball    
   end
 
   def random
@@ -115,6 +119,14 @@ class Delivery < GameComponents
       @hit = Hit.new(@facing_batsman, false)
     end
   end
+
+  def facing
+    if @hit.b_runs % 2 != 0
+      @facing_batsman = @non_striker
+      @non_striker = @facing_batsman
+    end
+  end
+
 end
 
 class Hit < GameComponents
@@ -126,7 +138,7 @@ class Hit < GameComponents
   end
 
   def get_score
-    if @is_hit = true
+    if @is_hit == true
       @b_runs = random_run_engine
     else
       @b_runs = 0

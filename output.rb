@@ -8,25 +8,20 @@ module Output
     puts "\n"
   end
 
-  def show_over_detail(detail = true)
-    puts "Over: #{@current_over.over_id} - Bowler: #{@current_over.bowler}"
-    if detail
-      @current_over.balls.each do |cb| 
-        cb.show_ball
-        sleep 0.2
-      end
-    end
+  def show_over
+    puts "Over: #{self.over_id} - Bowler: #{self.bowler}"
   end
 
   def show_over_summary
-    puts "Runs from the over: #{@current_over.o_runs}"
-    puts "Score:              #{@score}"  
-    puts "Run rate:           #{runs_per_over}"
+    puts "Runs from the over: #{self.o_runs}"
+    puts "Score:              #{m.current_innings.score}"  
+    puts "Run rate:           #{m.current_innings.runs_per_over}"
     puts ""
   end
 
   def show_ball
     puts "  Ball: #{@ball_in_over}(#{@facing_batsman.name}) - Pitch: #{@pitch} | Length: #{@length} | Spin: #{@spin} | Seam: #{@seam} | Runs: #{@hit.b_runs}"
+    sleep 0.2
   end
   
   def show_end

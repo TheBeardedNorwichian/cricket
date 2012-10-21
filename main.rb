@@ -1,13 +1,14 @@
-##Things to Think about
-# - Time!  How to handle the passages of time...
 class GameComponents
   include Output
 end
 
+
+#basic match container
 class Match < GameComponents
   attr_accessor :team1, :team2
   attr_reader :match_arr, :current_innings
 
+#detail refers to test output - basically a ball-by-ball desription.
   def initialize(detail = true, total_overs = 20)
     @match_arr = []
     @team1 = Team.new('team1.csv',"Bond Street CC")
@@ -50,11 +51,9 @@ class Innings < GameComponents
     x = 1
     @total_overs.times do
       @current_over = Over.new(pick_bowler, @current_batter_1, @current_batter_2, x)
-      show_over_detail
       @innings << @current_over
       x += 1
       @score = @score + @current_over.o_runs
-      show_over_summary
     end
   end
 
