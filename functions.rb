@@ -27,6 +27,15 @@ def show_age(dob)
   now.year - true_dob.year
 end
 
+def coin_toss
+  x = rand(100)
+  if x % 2 == 0
+    true 
+  else
+    false
+  end
+end
+
 class Float
 
   def rnd_2

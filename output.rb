@@ -26,11 +26,18 @@ module Output
   end
 
   def show_ball
-    puts "  Ball: #{@ball_in_over} - Pitch: #{@pitch} | Length: #{@length} | Spin: #{@spin} | Seam: #{@seam} | Runs: #{@b_runs}"
+    puts "  Ball: #{@ball_in_over}(#{@facing_batsman.name}) - Pitch: #{@pitch} | Length: #{@length} | Spin: #{@spin} | Seam: #{@seam} | Runs: #{@hit.b_runs}"
   end
   
   def show_end
-    puts "The final score is #{@score}"
+    puts "The final score is #{@score} with a run rate of #{runs_per_over}"
   end
   
+  def innings_header
+    puts "1st Innings"
+    puts "#{@batting_team.team_name} first to bat, with #{@batting_team.players[0].name} and #{@batting_team.players[1].name} opening."
+    puts "This is a #{@total_overs} over game."
+    puts ""
+  end
+
 end

@@ -42,28 +42,28 @@ class Player < GameComponents
     @age = show_age(@dob)
     @type = type
   end
+end
 
-  def hit
-  end
+class Bowler < Player
+end
 
-  def score
-  end
+class Batter < Player
+end
 
-  def state
-  end
-
-  def bowl
-  end
+class Fielder < Player
 end
 
 class Over < GameComponents
+  attr_accessor :facing_b, :non_striker
   attr_reader :balls, :o_runs, :wickets, :bowler, :balls, :over_id, :delivery
 
-  def initialize(bowler, over_id)
+  def initialize(bowler, current_batter_1, current_batter_2, over_id)
     @balls = []
     @o_runs = 0
     @wickets = 0
     @bowler = bowler
+    @facing_b = current_batter_1
+    @non_striker = current_batter_2
     @over_id = over_id
     @delivery
     run_over
@@ -72,7 +72,7 @@ class Over < GameComponents
   def run_over
     ball_in_over = 1
     while @balls.length < 6 do 
-      @ball = Ball.new(ball_in_over)
+      @ball = Delivery.new(ball_in_over, @bowler, @facing_b, @non_striker)
       @balls << @ball 
       ball_in_over += 1
       runs_in_over
@@ -80,26 +80,56 @@ class Over < GameComponents
   end
 
   def runs_in_over
-    @o_runs += @ball.b_runs
+    @o_runs += @ball.hit.b_runs
   end
-
-
 end
 
-class Ball < GameComponents
-  attr_reader :pitch, :length, :speed, :spin, :seam, :status, :ball_in_over, :b_runs, :b_desc
-  def initialize(ball_in_over)
+class Delivery < GameComponents
+  attr_reader :pitch, :length, :speed, :spin, :seam, :status, :ball_in_over, :hit
+
+  def initialize(ball_in_over, bowler, facing_batsman, non_striker)
     @pitch = sprintf '%02d', random
     @length = sprintf '%02d', random
     @speed = sprintf '%02d', random
     @spin = sprintf '%02d', random
     @seam = sprintf '%02d', random
     @ball_in_over = ball_in_over
-    @b_runs = random_run_engine
-    @b_desc
+    @bowler = bowler
+    @facing_batsman = facing_batsman
+    @non_striker = non_striker
+    is_hit
   end
 
   def random
     rand(100)
+  end
+
+  def wicket
+  end
+
+  def is_hit
+    x = random
+    if x % 2 == 0
+      @hit = Hit.new(@facing_batsman, true)
+    else
+      @hit = Hit.new(@facing_batsman, false)
+    end
+  end
+end
+
+class Hit < GameComponents
+  attr_accessor :b_runs
+  def initialize(batsman, hit)
+    @batsman = batsman
+    @is_hit = hit  
+    get_score
+  end
+
+  def get_score
+    if @is_hit = true
+      @b_runs = random_run_engine
+    else
+      @b_runs = 0
+    end
   end
 end
