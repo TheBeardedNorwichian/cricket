@@ -33,6 +33,7 @@ end
 
 
 class Player < GameComponents
+  attr_accessor :stats
   attr_reader :name, :dob, :hand, :age, :type
 
   def initialize(name, dob, hand, type)
@@ -41,6 +42,12 @@ class Player < GameComponents
     @hand = hand
     @age = show_age(@dob)
     @type = type
+    @stats = {
+        balls_faced:  0, 
+        dot_balls:    0,
+        runs_scored:  0,
+        fours_hit:    0,
+        sixes_hit:    0} 
   end
 end
 
@@ -51,97 +58,4 @@ class Batter < Player
 end
 
 class Fielder < Player
-end
-
-class Over < GameComponents
-  attr_accessor :facing_b, :non_striker
-  attr_reader :balls, :o_runs, :wickets, :bowler, :balls, :over_id, :delivery
-
-  def initialize(bowler, current_batter_1, current_batter_2, over_id)
-    @balls = []
-    @o_runs = 0
-    @wickets = 0
-    @bowler = bowler
-    @facing_b = current_batter_1
-    @non_striker = current_batter_2
-    @over_id = over_id
-    @delivery
-    show_over
-    run_over
-    show_over_summary
-  end
-
-  def run_over
-    ball_in_over = 1
-    while @balls.length < 6 do 
-      @ball = Delivery.new(ball_in_over, @bowler, @facing_b, @non_striker)
-      @balls << @ball 
-      ball_in_over += 1
-      runs_in_over
-    end
-  end
-
-  def runs_in_over
-    @o_runs += @ball.hit.b_runs
-  end
-end
-
-class Delivery < GameComponents
-  attr_reader :pitch, :length, :speed, :spin, :seam, :status, :ball_in_over, :hit
-
-  def initialize(ball_in_over, bowler, facing_batsman, non_striker)
-    @pitch = sprintf '%02d', random
-    @length = sprintf '%02d', random
-    @speed = sprintf '%02d', random
-    @spin = sprintf '%02d', random
-    @seam = sprintf '%02d', random
-    @ball_in_over = ball_in_over
-    @bowler = bowler
-    @facing_batsman = facing_batsman
-    @non_striker = non_striker
-    is_hit
-    facing
-    show_ball    
-  end
-
-  def random
-    rand(100)
-  end
-
-  def wicket
-  end
-
-  def is_hit
-    x = random
-    if x % 2 == 0
-      @hit = Hit.new(@facing_batsman, true)
-    else
-      @hit = Hit.new(@facing_batsman, false)
-    end
-  end
-
-  def facing
-    if @hit.b_runs % 2 != 0
-      @facing_batsman = @non_striker
-      @non_striker = @facing_batsman
-    end
-  end
-
-end
-
-class Hit < GameComponents
-  attr_accessor :b_runs
-  def initialize(batsman, hit)
-    @batsman = batsman
-    @is_hit = hit  
-    get_score
-  end
-
-  def get_score
-    if @is_hit == true
-      @b_runs = random_run_engine
-    else
-      @b_runs = 0
-    end
-  end
 end
