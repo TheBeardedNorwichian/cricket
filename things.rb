@@ -33,7 +33,7 @@ end
 
 
 class Player < GameComponents
-  attr_accessor :stats
+  attr_accessor :stats_batting, :stats_bowling, :stats_fielding
   attr_reader :name, :dob, :hand, :age, :type
 
   def initialize(name, dob, hand, type)
@@ -42,20 +42,35 @@ class Player < GameComponents
     @hand = hand
     @age = show_age(@dob)
     @type = type
-    @stats = {
+    @stats_batting = {
+        batted:       false,
         balls_faced:  0, 
         dot_balls:    0,
         runs_scored:  0,
         fours_hit:    0,
-        sixes_hit:    0} 
+        sixes_hit:    0
+      }
+    @stats_bowling = {
+        overs:        0,
+        deliveries:   0, 
+        runs_scored:  0,
+        wickets:      0,
+        wides:        0,
+        no_balls:     0,
+        runs:         0
+      }
+    @stats_fielding = {
+        catches:      0,
+        stumpings:    0,
+        run_outs:     0
+      }
   end
-end
 
-class Bowler < Player
-end
+  def strike_rate
+    ((@stats_batting[:runs_scored].to_f / @stats_batting[:balls_faced].to_f) * 100).to_f.rnd_2
+  end
 
-class Batter < Player
-end
-
-class Fielder < Player
+  def economy
+    (@stats_bowling[:runs_scored].to_f / @stats_bowling[:overs].to_f).to_f.rnd_2
+  end
 end
