@@ -48,7 +48,8 @@ class Player < GameComponents
         dot_balls:    0,
         runs_scored:  0,
         fours_hit:    0,
-        sixes_hit:    0
+        sixes_hit:    0,
+        out:          false
       }
     @stats_bowling = {
         overs:        0,

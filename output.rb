@@ -33,33 +33,21 @@ module Output
   
   def innings_summary
     puts "The final score is #{@score} with a run rate of #{runs_per_over}"
+    puts ""
   end
 
   def end_of_innings_stats#
     puts "B A T T I N G   S T A T S"
-    @batted_batters.each do |batter|
-      puts "Stats for: #{batter.name}"
-      puts "Batted?       #{batter.stats_batting[:batted]}"
-      puts "Balls faced:  #{batter.stats_batting[:balls_faced]}"
-      puts "Dot balls:    #{batter.stats_batting[:dot_balls]}"
-      puts "Runs scored:  #{batter.stats_batting[:runs_scored]}"
-      puts "Fours:        #{batter.stats_batting[:fours_hit]}"
-      puts "Sixes:        #{batter.stats_batting[:sixes_hit]}"
-      puts "Strike rate:  #{batter.strike_rate}"
-      puts ""
+    puts ""
+    @batted_batters.each do |b|
+      puts "#{b.name} | #{b.stats_batting[:runs_scored]} | #{b.stats_batting[:balls_faced]} | #{b.strike_rate} | #{b.stats_batting[:dot_balls]} | #{b.stats_batting[:fours_hit]} | #{b.stats_batting[:sixes_hit]}"
     end
+    puts ""
     puts "B O W L I N G   S T A T S"
-    @all_bowlers.each do |bowler|
-      puts "Stats for: #{bowler.name}"
-      puts "Overs:        #{bowler.stats_bowling[:overs]}"
-      puts "Balls bowled: #{bowler.stats_bowling[:deliveries]}"
-      puts "Runs_scored:  #{bowler.stats_bowling[:runs_scored]}"
-      puts "Economy:      #{bowler.economy}"
-      puts "Wickets:      #{bowler.stats_bowling[:wickets]}"
-      puts "No Balls:     #{bowler.stats_bowling[:no_balls]}"
-      puts "Wides:        #{bowler.stats_bowling[:wides]}"
-      puts ""
+    puts ""
+    @all_bowlers.each do |b|
+      puts "#{b.name} | #{b.stats_bowling[:overs]} | #{b.stats_bowling[:deliveries]} | #{b.stats_bowling[:wickets]} | #{b.stats_bowling[:runs_scored]} | #{b.economy} | #{b.stats_bowling[:no_balls]} | #{b.stats_bowling[:wides]}"
     end
+    puts ""
   end
-
 end

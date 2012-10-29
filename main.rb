@@ -8,25 +8,18 @@ class Match < GameComponents
   attr_accessor :team1, :team2, :current_innings, :first_innings_1, :first_innings_2
   attr_reader :match_arr
 
-  def initialize(total_overs = 20)
-    @match_arr = []
-    @team1 = Team.new('team1.csv',"Bond Street CC")
-    @team2 = Team.new('team2.csv',"Norfolk CC")
-    @ground = Ground.new()
-    @total_overs = total_overs
+  def initialize(total_overs = 90)
+    @match_arr    = []
+    @team1        = Team.new('team1.csv',"Bond Street CC")
+    @team2        = Team.new('team2.csv',"Norfolk CC")
+    @ground       = Ground.new()
+    @total_overs  = total_overs
   end
 
   def go
-    # if coin_toss
       puts "#{@team1.team_name} are batting first"
       @first_innings_1 = Innings.new(@team1, @team2, @total_overs)
       @first_innings_1.go
-      # @first_innings_2 = Innings.new(@team2, @team1, @total_overs)
-    #  else
-      # puts "#{@team2.team_name} are batting first"
-      # @first_innings_1 = Innings.new(@team2, @team1, @total_overs)
-      # @first_innings_2 = Innings.new(@team1, @team2, @total_overs)
-    # end
   end
 end
 
@@ -38,19 +31,19 @@ class Innings < GameComponents
   attr_reader :innings, :batting_team, :fielding_team
 
   def initialize(batting_team, fielding_team, total_overs)
-    @batting_team = batting_team
-    @fielding_team = fielding_team
-    @score = 0
-    @wickets = 0
-    @total_overs = total_overs
-    @current_over = nil
+    @batting_team     = batting_team
+    @fielding_team    = fielding_team
+    @score            = 0
+    @wickets          = 0
+    @total_overs      = total_overs
+    @current_over     = nil
     @current_over_num = 1
-    @current_bowler = nil
-    @facing_b = @batting_team.players[0]
-    @non_striker = @batting_team.players[1]
-    @innings = []
-    @all_bowlers = []
-    @batted_batters = []
+    @current_bowler   = nil
+    @facing_b         = @batting_team.players[0]
+    @non_striker      = @batting_team.players[1]
+    @innings          = []
+    @all_bowlers      = []
+    @batted_batters   = []
     all_bowlers
   end
 
@@ -79,7 +72,7 @@ class Innings < GameComponents
   end
 
   def new_over
-    @current_over = Over.new(pick_bowler, @facing_b, @non_striker, @current_over_num)
+    @current_over = Over.new(pick_bowler, @facing_b, @non_striker, @current_over_num, @batting_team)
   end
 
   def runs_per_over
@@ -118,8 +111,6 @@ class Innings < GameComponents
     @batting_team.players.each do |pl|
       if pl.stats_batting[:batted] == true
         @batted_batters << pl
-      else
-        puts "You are an idiot!"
       end
     end
   end
@@ -132,14 +123,15 @@ class Over < GameComponents
   attr_accessor :facing_b, :non_striker
   attr_reader :balls, :o_runs, :wickets, :bowler, :ball, :over_id, :score
 
-  def initialize(bowler, current_batter_1, current_batter_2, over_id)
-    @balls = []
-    @o_runs = 0
-    @wickets = 0
-    @bowler = bowler
-    @facing_b = current_batter_1
-    @non_striker = current_batter_2
-    @over_id = over_id
+  def initialize(bowler, current_batter_1, current_batter_2, over_id, batting_team)
+    @balls        = []
+    @o_runs       = 0
+    @wickets      = 0
+    @bowler       = bowler
+    @facing_b     = current_batter_1
+    @non_striker  = current_batter_2
+    @batting_team = batting_team
+    @over_id      = over_id
     @ball
     @bowler.stats_bowling[:overs] += 1
   end
@@ -150,6 +142,8 @@ class Over < GameComponents
     while @balls.length < 6 do 
       @ball = Delivery.new(ball_in_over, @bowler, @facing_b, @non_striker)
       @ball.bowl_ball
+      check_for_wicket
+      check_for_end_of_innings
       @balls << @ball 
       ball_in_over += 1
       runs_in_over
@@ -161,12 +155,28 @@ class Over < GameComponents
     @o_runs += @ball.runs_scored
   end
 
+  def check_for_wicket
+    if @ball.facing_batsman.stats_batting[:out] == true
+      @batting_team.players.each do |batter|
+        if batter.stats_batting[:out] == false && batter.stats_batting[:batted] == false
+          @facing_b = batter
+          @bowler.stats_bowling[:wickets] += 1
+          batter.stats_batting[:batted] = true
+          break
+        end
+      end
+    end
+  end
+
+  def check_for_end_of_innings
+  end
+
   def facing
     old_face     = @facing_b
     new_face     = @non_striker 
     if @ball.runs_scored % 2 != 0
-      @facing_b = new_face
-      @non_striker = old_face
+      @facing_b     = new_face
+      @non_striker  = old_face
     end
   end
 end
@@ -175,18 +185,20 @@ end
 
 
 class Delivery < GameComponents
-  attr_reader :pitch, :length, :speed, :spin, :seam, :status, :ball_in_over, :hit, :runs_scored
+  attr_accessor :facing_batsman
+  attr_reader :pitch, :length, :speed, :spin, :seam, :status, 
+    :ball_in_over, :hit, :runs_scored
 
   def initialize(ball_in_over, bowler, facing_batsman, non_striker)
-    @pitch = sprintf '%02d', random
-    @length = sprintf '%02d', random
-    @speed = sprintf '%02d', random
-    @spin = sprintf '%02d', random
-    @seam = sprintf '%02d', random
-    @ball_in_over = ball_in_over
-    @bowler = bowler
+    @pitch          = sprintf '%02d', random
+    @length         = sprintf '%02d', random
+    @speed          = sprintf '%02d', random
+    @spin           = sprintf '%02d', random
+    @seam           = sprintf '%02d', random
+    @ball_in_over   = ball_in_over
+    @bowler         = bowler
     @facing_batsman = facing_batsman
-    @non_striker = non_striker
+    @non_striker    = non_striker
   end
 
   def bowl_ball
@@ -206,22 +218,26 @@ class Delivery < GameComponents
 
   def is_hit
     r = random
-    @hit = Hit.new(@facing_batsman, @bowler, true)
-    @runs_scored = @hit.b_runs
+    if r < 96
+      @hit = Hit.new(@facing_batsman, @bowler, true)
+      @runs_scored = @hit.b_runs
+    else
+      wicket
+      @runs_scored = 0
+    end
   end
 
   def wicket
+    @facing_batsman.stats_batting[:out] = true
   end
-
 end
-
 
 class Hit < GameComponents
   attr_reader :b_runs
   def initialize(batsman, bowler, hit)
-    @batsman = batsman
-    @bowler = bowler
-    @is_hit = hit
+    @batsman    = batsman
+    @bowler     = bowler
+    @is_hit     = hit
     get_score
   end
 
