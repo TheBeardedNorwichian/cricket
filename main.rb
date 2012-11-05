@@ -5,7 +5,7 @@ end
 
 
 class Match < GameComponents
-  attr_accessor :team1, :team2, :current_innings, :first_innings_1, :first_innings_2
+  attr_accessor :team1, :team2, :current_innings
   attr_reader :match_arr
 
   def initialize(total_overs = 90)
@@ -16,10 +16,9 @@ class Match < GameComponents
     @total_overs  = total_overs
   end
 
-  def go
+  def new_innings
       puts "#{@team1.team_name} are batting first"
-      @first_innings_1 = Innings.new(@team1, @team2, @total_overs)
-      @first_innings_1.go
+      @current_innings = Innings.new(@team1, @team2, @total_overs)
   end
 end
 
@@ -28,7 +27,7 @@ end
 
 class Innings < GameComponents
   attr_accessor :score, :wickets, :current_over
-  attr_reader :innings, :batting_team, :fielding_team
+  attr_reader :innings, :batting_team, :fielding_team, :total_overs
 
   def initialize(batting_team, fielding_team, total_overs)
     @batting_team     = batting_team
@@ -41,23 +40,18 @@ class Innings < GameComponents
     @current_bowler   = nil
     @facing_b         = @batting_team.players[0]
     @non_striker      = @batting_team.players[1]
+    @facing_b.stats_batting[:batted]       = true
+    @non_striker.stats_batting[:batted]    = true    
     @innings          = []
     @all_bowlers      = []
     @batted_batters   = []
     all_bowlers
   end
 
-  def go
-    run_innings
-    batters_who_batted
-    end_of_innings_stats
-  end
-
   def run_innings
     innings_header
-    @facing_b.stats_batting[:batted]       = true
-    @non_striker.stats_batting[:batted]    = true    
     @total_overs.times { run_over }
+    batters_who_batted
     innings_summary
   end
 
@@ -81,6 +75,7 @@ class Innings < GameComponents
 
   def new_score
     @score = @score + @current_over.o_runs
+    @wickets = @wickets + @current_over.wickets
   end
 
   def pick_bowler
@@ -161,6 +156,7 @@ class Over < GameComponents
         if batter.stats_batting[:out] == false && batter.stats_batting[:batted] == false
           @facing_b = batter
           @bowler.stats_bowling[:wickets] += 1
+          @wickets += 1
           batter.stats_batting[:batted] = true
           break
         end
