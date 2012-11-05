@@ -20,9 +20,10 @@ module Output
   end
 
   def show_over_summary
-    puts "Runs from the over: #{@current_over.o_runs}"
-    puts "Score:              #{@score} / #{@wickets}"  
-    puts "Run rate:           #{runs_per_over}"
+    puts "Runs from the over:    #{@current_over.o_runs}"
+    puts "Wickets from the over: #{@current_over.wickets}"
+    puts "Score:                 #{@score} / #{@wickets}"  
+    puts "Run rate:              #{runs_per_over}"
     puts ""
   end
 
@@ -34,27 +35,33 @@ module Output
   def innings_summary
     puts "The final score is #{@score} for #{@wickets} with a run rate of #{runs_per_over}"
     puts ""
-  end
+  end   
 
   def end_of_innings_stats#
     puts "B A T T I N G   S T A T S"
     puts ""
     @batted_batters.each do |b|
-      puts "#{padding(b.name,20)} | #{padding(b.stats_batting[:runs_scored],2)} | #{padding(b.stats_batting[:balls_faced],2)} | #{padding(b.strike_rate,6)} | #{padding(b.stats_batting[:dot_balls],2)} | #{padding(b.stats_batting[:fours_hit],2)} | #{padding(b.stats_batting[:sixes_hit],2)} "
+      puts "#{pad_l(b.name,20)} | #{pad_r(b.stats_batting[:runs_scored],3)} | #{pad(b.stats_batting[:balls_faced],3)} | #{pad(b.strike_rate,6)} | #{pad(b.stats_batting[:dot_balls],2)} | #{pad(b.stats_batting[:fours_hit],2)} | #{pad(b.stats_batting[:sixes_hit],2)} "
     end
     puts ""
     puts "B O W L I N G   S T A T S"
     puts ""
     @all_bowlers.each do |b|
-      puts "#{padding(b.name,20)} | #{padding(b.stats_bowling[:overs],2)} | #{padding(b.stats_bowling[:deliveries],3)} | #{padding(b.stats_bowling[:wickets],2)} | #{padding(b.stats_bowling[:runs_scored],2)} | #{padding(b.economy,5)} | #{padding(b.stats_bowling[:no_balls],2)} | #{padding(b.stats_bowling[:wides],2)}"
+      puts "#{pad(b.name,20)} | #{pad(b.stats_bowling[:overs],2)} | #{pad(b.stats_bowling[:deliveries],3)} | #{pad(b.stats_bowling[:wickets],2)} | #{pad(b.stats_bowling[:runs_scored],2)} | #{pad(b.economy,5)} | #{pad(b.stats_bowling[:no_balls],2)} | #{pad(b.stats_bowling[:wides],2)}"
     end
     puts ""
   end
 
-  def padding(string, size)
-    padding = size - string.to_s.length
-    return "#{string}" + " " * padding
+  def pad_l(string, size)
+    pad = size - string.to_s.length
+    return "#{string}" + " " * pad
   end
+
+  def pad_r(string, size)
+    pad = size - string.to_s.length
+    return " " * pad + "#{string}"
+  end
+
 
   def format(string)
     return sprintf '%02d', string
