@@ -49,7 +49,8 @@ class Player < GameComponents
         runs_scored:  0,
         fours_hit:    0,
         sixes_hit:    0,
-        out:          false
+        out:          false,
+        wicket_taker: "Not Out"
       }
     @stats_bowling = {
         overs:        0,

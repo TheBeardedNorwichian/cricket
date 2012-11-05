@@ -50,20 +50,27 @@ class Innings < GameComponents
 
   def run_innings
     innings_header
-    @total_overs.times { run_over }
+    run_overs
     batters_who_batted
     innings_summary
+    end_of_innings_stats
   end
 
-  def run_over
-    new_over
-    @current_over.run_over
-    @innings << @current_over
-    new_score
-    show_over_summary
-    if @current_over.innings_over == true
+  def run_overs
+    catch (:in_over) do
+      @total_overs.times do
+        new_over
+        @current_over.run_over
+        @innings << @current_over
+        new_score
+        #show_over_summary
+        if @current_over.innings_over == true
+          puts "this should do it"
+          throw :in_over
+        end
+        close_over
+      end
     end
-    close_over
   end
 
   def close_over
@@ -139,14 +146,15 @@ class Over < GameComponents
   end
 
   def run_over
-    over_heading
+    #over_heading
     ball_in_over = 1
     while @balls.length < 6 do 
       @ball = Delivery.new(ball_in_over, @bowler, @facing_b, @non_striker)
       @ball.bowl_ball
       check_for_wicket
       @balls << @ball 
-      if check_for_end_of_innings == true
+      check_for_end_of_innings
+      if @innings_over == true
         break
       end
       ball_in_over += 1
@@ -161,11 +169,11 @@ class Over < GameComponents
 
   def check_for_wicket
     if @ball.facing_batsman.stats_batting[:out] == true
+      @wickets += 1
+      @bowler.stats_bowling[:wickets] += 1
       @batting_team.players.each do |batter|
         if batter.stats_batting[:out] == false && batter.stats_batting[:batted] == false
           @facing_b = batter
-          @bowler.stats_bowling[:wickets] += 1
-          @wickets += 1
           batter.stats_batting[:batted] = true
           break
         end
@@ -180,9 +188,8 @@ class Over < GameComponents
         total_wickets += 1
       end
     end
-    if total_wickets > 9
+    if total_wickets == 10
       @innings_over = true
-      return true
     end
   end
 
@@ -233,7 +240,7 @@ class Delivery < GameComponents
 
   def is_hit
     r = random
-    if r < 97
+    if r < 94
       @hit = Hit.new(@facing_batsman, @bowler, true)
       @runs_scored = @hit.b_runs
     else
@@ -244,6 +251,7 @@ class Delivery < GameComponents
 
   def wicket
     @facing_batsman.stats_batting[:out] = true
+    @facing_batsman.stats_batting[:wicket_taker] = @bowler.name
   end
 end
 
