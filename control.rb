@@ -2,10 +2,11 @@ class Control < GameComponents
   attr_accessor :match
 
   def go
-    @match = Match.new(50)
-    @match.team1.show_team
-    @match.team2.show_team
-    @match.new_innings
+    @match = Match.new(20)
+    @match.first_innings
     @match.current_innings.run_innings
+    @match.second_innings
+    @match.current_innings.run_innings
+    @match.check_winner
   end
 end

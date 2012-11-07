@@ -1,16 +1,16 @@
 module Output
 
   def innings_header
-    puts "1st Innings"
-    puts "#{@batting_team.team_name} first to bat, with #{@batting_team.players[0].name} and #{@batting_team.players[1].name} opening."
-    puts "This is a #{@total_overs} over game."
+    1.times { puts "" }
+    puts "#################################################################"
+    puts "#{@name}"
     puts ""
   end
 
   def show_team
     puts "Team: #{self.team_name}"
     self.players.each do |pl|
-      puts "Name: #{pl.name} | Hand: #{pl.hand}   | Type: #{pl.type}   | Age: #{pl.age}" 
+      puts "#{pad_l(pl.name,17)} | #{pad_l(pl.hand,6)} | #{pad_l(pl.type,13)} | #{pad_l(pl.age,2)}" 
     end
     puts "\n"
   end
@@ -33,17 +33,23 @@ module Output
   end
   
   def innings_summary
-    puts "The final score is #{@score} for #{@wickets} with a run rate of #{runs_per_over}"
-    puts ""
+    if @wickets == 10 
+      puts "The final score is #{@score} all out in #{overs_decimal} overs." 
+    else
+      puts "The final score is #{@score} for #{@wickets}"
+    end
   end   
 
   def end_of_innings_stats
-    puts ""
     @batted_batters.each do |b|
-      puts "#{pad_l(b.name,20)} - #{pad_l(b.stats_batting[:wicket_taker],15)} | #{pad_r(b.stats_batting[:runs_scored],3)} | #{pad_r(b.stats_batting[:balls_faced],3)} | #{pad_r(b.strike_rate,6)} | #{pad_r(b.stats_batting[:dot_balls],2)} | #{pad_r(b.stats_batting[:fours_hit],2)} | #{pad_r(b.stats_batting[:sixes_hit],2)} "
+      puts "#{pad_l(b.name,20)} - #{pad_l(b.stats_batting[:wicket_taker],40)} #{pad_r(b.stats_batting[:runs_scored],3)} | #{pad_r(b.stats_batting[:balls_faced],3)} | #{pad_r(b.strike_rate,6)} | #{pad_r(b.stats_batting[:fours_hit],2)} | #{pad_r(b.stats_batting[:sixes_hit],2)} "
     end
     puts ""
-    puts " - #{@score}/#{@wickets} - "
+    if @wickets == 10
+      puts " - #{@score} all out (#{overs_decimal} overs) at #{runs_per_over} runs per over."
+    else
+      puts " - #{@score} for #{@wickets} (#{overs_decimal} overs) at #{runs_per_over} runs per over."
+    end
     puts ""
     puts "B O W L I N G   S T A T S"
     puts ""
@@ -63,8 +69,19 @@ module Output
     return " " * pad + "#{string}"
   end
 
-
   def format(string)
     return sprintf '%02d', string
+  end
+
+  def runs_per_over
+    (@score.to_f/@current_over_num.to_f).rnd_2
+  end
+
+  def overs_decimal
+    if @current_over.ball_in_over == 7
+    "#{@current_over_num}"
+    else  
+    "#{@current_over_num}.#{@current_over.ball_in_over}"
+    end
   end
 end

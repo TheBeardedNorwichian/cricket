@@ -6,17 +6,24 @@ end
 
 def random_run_engine
   x = rand(100)
-  if x >=0 && x < 60
+
+  one_run       = 50
+  two_runs      = 70
+  three_runs    = 80
+  four_runs     = 85
+  six_runs      = 95
+
+  if x >=0 && x < one_run
     return 0
-  elsif x >= 60 && x < 80
+  elsif x >= one_run && x < two_runs
     return 1
-  elsif x >= 80 && x < 87
+  elsif x >= two_runs && x < three_runs
     return 2
-  elsif x >= 87 && x < 92
+  elsif x >= three_runs && x < four_runs
     return 3
-  elsif x >= 92 && x < 98
+  elsif x >= four_runs && x < six_runs
     return 4
-  elsif x >= 97 && x < 100
+  elsif x >= six_runs && x < 100
     return 6
   end
 end
