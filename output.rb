@@ -8,7 +8,7 @@ module Output
   end
 
   def show_team
-    puts "Team: #{self.team_name}"
+    puts "Team: #{@team_name}"
     self.players.each do |pl|
       puts "#{pad_l(pl.name,17)} | #{pad_l(pl.hand,6)} | #{pad_l(pl.type,13)} | #{pad_l(pl.age,2)}" 
     end
@@ -16,7 +16,20 @@ module Output
   end
 
   def over_heading
-    puts "Over: #{self.over_id} - Bowler: #{self.bowler.name}"
+    puts "Over: #{@over_id} - Bowler: #{@bowler.name}"
+  end
+
+  def show_ball
+    puts "  Ball: #{@ball_in_over} - #{@facing_batsman.name} - #{@facing_batsman.stats_batting[:runs_scored]} |  #{show_wicket}"
+    sleep 1
+  end
+  
+  def show_wicket
+    if @facing_batsman.stats_batting[:out] == true 
+      return "Wicket! - Bowled by #{@bowler.name}".red 
+    else 
+      return "Runs: #{@runs_scored}"
+    end
   end
 
   def show_over_summary
@@ -27,11 +40,6 @@ module Output
     puts ""
   end
 
-  def show_ball
-    #puts "  Ball: #{@ball_in_over}(#{@facing_batsman.name}) | Runs: #{@hit.b_runs}"
-    #sleep 0.1
-  end
-  
   def innings_summary
     if @wickets == 10 
       puts "The final score is #{@score} all out in #{overs_decimal} overs." 
@@ -42,7 +50,7 @@ module Output
 
   def end_of_innings_stats
     @batted_batters.each do |b|
-      puts "#{pad_l(b.name,20)} - #{pad_l(b.stats_batting[:wicket_taker],40)} #{pad_r(b.stats_batting[:runs_scored],3)} | #{pad_r(b.stats_batting[:balls_faced],3)} | #{pad_r(b.strike_rate,6)} | #{pad_r(b.stats_batting[:fours_hit],2)} | #{pad_r(b.stats_batting[:sixes_hit],2)} "
+      puts "#{b.name.pad_l(20)} - #{pad_l(b.stats_batting[:wicket_taker],40)} #{pad_r(b.stats_batting[:runs_scored],3)} | #{pad_r(b.stats_batting[:balls_faced],3)} | #{pad_r(b.strike_rate,6)} | #{pad_r(b.stats_batting[:fours_hit],2)} | #{pad_r(b.stats_batting[:sixes_hit],2)} "
     end
     puts ""
     if @wickets == 10
@@ -69,8 +77,16 @@ module Output
     return " " * pad + "#{string}"
   end
 
-  def format(string)
-    return sprintf '%02d', string
+  def column_width(string)
+    max_width = []
+    column.each do |x|
+      max_width << x.length
+    end
+    return max_width.max
+  end
+
+  def format(float)
+    return sprintf '%02d', float
   end
 
   def runs_per_over

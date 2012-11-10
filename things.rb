@@ -16,7 +16,7 @@ end
 class Team < GameComponents
   attr_reader :team_name, :country, :ground, :players, :team
 
-  def initialize(data, team_name="Norfolk CC", country ="England", county="Norfolk",ground="Lords")
+  def initialize(data, team_name, country ="England", county="Norfolk",ground="Lords")
     @team_name = team_name
     @players = Array.new 
     @country = country
@@ -34,14 +34,17 @@ end
 
 class Player < GameComponents
   attr_accessor :stats_batting, :stats_bowling, :stats_fielding
-  attr_reader :name, :dob, :hand, :age, :type
+  attr_reader :name, :dob, :hand, :age, :type, :batting_attr
 
-  def initialize(name, dob, hand, type)
+  def initialize(name, dob, hand, type, bat_var)
     @name = name
     @dob = dob
     @hand = hand
     @age = show_age(@dob)
     @type = type
+    @batting_attr = {
+        batting:      bat_var.to_i
+    }
     @stats_batting = {
         batted:       false,
         balls_faced:  0, 

@@ -30,10 +30,13 @@ class Match < GameComponents
 
   def check_winner
     if @first_innings.score > @second_innings.score
-      puts "#{@team1.team_name} beat #{@team2.team_name} by #{win_score(@first_innings.score, @second_innings.score)} runs."
+      team_win = "# #{@team1.team_name} beat #{@team2.team_name} by #{win_score(@first_innings.score, @second_innings.score)} runs. #"
     else
-      puts "#{@team2.team_name} beat #{@team1.team_name} by #{win_score(@second_innings.score, @first_innings.score)} runs."
+      team_win ="# #{@team2.team_name} beat #{@team1.team_name} by #{win_score(@second_innings.score, @first_innings.score)} runs. #"
     end
+    puts "#" * (team_win.length)
+    puts team_win
+    puts "#" * (team_win.length)
   end
 
   def win_score(score1, score2)
@@ -66,6 +69,7 @@ class Innings < GameComponents
     @all_bowlers      = []
     @batted_batters   = []
     @fall_of_wicket   = []
+    @patnership       = {}
     all_bowlers
   end
 
@@ -82,11 +86,12 @@ class Innings < GameComponents
         @current_over.run_over
         @innings << @current_over
         new_score
-        #show_over_summary
+        close_over
+        show_over_summary
         if @current_over.innings_over == true
           throw :in_over
         end
-        close_over
+
       end
     end
     batters_who_batted
@@ -163,13 +168,13 @@ class Over < GameComponents
   end
 
   def run_over
-    #over_heading
+    over_heading
     @ball_in_over = 1
     while @balls.length < 6 do 
       @ball = Delivery.new(@ball_in_over, @bowler, @facing_b, @non_striker)
       @ball.bowl_ball
-      check_for_wicket
-      @balls << @ball 
+      @balls << @ball
+      check_for_wicket 
       check_for_end_of_innings
       if @innings_over == true
         break
@@ -187,7 +192,6 @@ class Over < GameComponents
   def check_for_wicket
     if @ball.facing_batsman.stats_batting[:out] == true
       @wickets += 1
-      @bowler.stats_bowling[:wickets] += 1
       @batting_team.players.each do |batter|
         if batter.stats_batting[:out] == false && batter.stats_batting[:batted] == false
           @facing_b = batter
@@ -238,10 +242,12 @@ class Delivery < GameComponents
     @bowler         = bowler
     @facing_batsman = facing_batsman
     @non_striker    = non_striker
+    @runs_scored    = nil
   end
 
   def bowl_ball
     delivery_stats
+    #bowl ball
     is_hit
     show_ball
   end
@@ -258,8 +264,11 @@ class Delivery < GameComponents
   def is_hit
     r = random
     if r < 96
-      @hit = Hit.new(@facing_batsman, @bowler, true)
+      @hit = Hit.new(@facing_batsman, @bowler)
       @runs_scored = @hit.b_runs
+      if @runs_scored == 0
+        @facing_batsman.stats_batting[:dot_balls] += 1
+      end
     else
       wicket
       @runs_scored = 0
@@ -269,36 +278,29 @@ class Delivery < GameComponents
   def wicket
     @facing_batsman.stats_batting[:out] = true
     @facing_batsman.stats_batting[:wicket_taker] = @bowler.name
+    @bowler.stats_bowling[:wickets] += 1
   end
 end
 
 class Hit < GameComponents
   attr_reader :b_runs
-  def initialize(batsman, bowler, hit)
+  def initialize(batsman, bowler)
     @batsman    = batsman
     @bowler     = bowler
-    @is_hit     = hit
     get_score
   end
 
   def get_score
-    if @is_hit == true
-      @b_runs = random_run_engine
-      if @b_runs > 0
-        @batsman.stats_batting[:runs_scored] += @b_runs
-        @bowler.stats_bowling[:runs_scored] += @b_runs
-        if @b_runs == 4
-          @batsman.stats_batting[:fours_hit] += 1
-        end
-        if @b_runs == 6
-          @batsman.stats_batting[:sixes_hit] += 1
-        end
-      else
-        @batsman.stats_batting[:dot_balls] += 1
+    @b_runs = random_run_engine(@batsman.batting_attr[:batting])
+    if @b_runs > 0
+      @batsman.stats_batting[:runs_scored] += @b_runs
+      @bowler.stats_bowling[:runs_scored] += @b_runs
+      if @b_runs == 4
+        @batsman.stats_batting[:fours_hit] += 1
       end
-    else
-      @b_runs = 0
-      @batsman.stats_batting[:dot_balls] += 1
+      if @b_runs == 6
+        @batsman.stats_batting[:sixes_hit] += 1
+      end
     end
   end
 end

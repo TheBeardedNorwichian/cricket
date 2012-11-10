@@ -1,17 +1,18 @@
 def read_in_csv_data(dest, csv_file_name)
   CSV.foreach(csv_file_name, headers: true) do |row|
-    dest << Player.new(row["name"], row["dob"], row["hand"], row["type"])
+    dest << Player.new(row["name"], row["dob"], row["hand"], row["type"], row["bat_var"])
   end
 end
 
-def random_run_engine
-  x = rand(100)
+def random_run_engine(bat_var)
+  y = rand(100)
+  x = y + bat_var
 
-  one_run       = 50
-  two_runs      = 70
-  three_runs    = 80
-  four_runs     = 85
-  six_runs      = 95
+  one_run       = 60
+  two_runs      = 75
+  three_runs    = 86
+  four_runs     = 93
+  six_runs      = 98
 
   if x >=0 && x < one_run
     return 0
@@ -23,7 +24,7 @@ def random_run_engine
     return 3
   elsif x >= four_runs && x < six_runs
     return 4
-  elsif x >= six_runs && x < 100
+  elsif x >= six_runs
     return 6
   end
 end
@@ -46,6 +47,15 @@ end
 class Float
 
   def rnd_2
-    (self*100).round / 100.0
+    (self.to_f*100).round / 100.0
   end
+end
+
+class String
+
+  def pad_l(size)
+    pad = size - self.to_s.length
+    return "#{self}" + " " * pad
+  end
+
 end
