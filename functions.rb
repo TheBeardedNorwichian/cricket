@@ -8,11 +8,11 @@ def random_run_engine(bat_var)
   y = rand(100)
   x = y + bat_var
 
-  one_run       = 60
-  two_runs      = 75
-  three_runs    = 86
-  four_runs     = 93
-  six_runs      = 98
+  one_run       = 70
+  two_runs      = 85
+  three_runs    = 91
+  four_runs     = 94
+  six_runs      = 99
 
   if x >=0 && x < one_run
     return 0
@@ -44,18 +44,19 @@ def coin_toss
   end
 end
 
+def pad_l(string, size)
+  pad = size - string.to_s.length
+  return "#{string}" + " " * pad
+end
+
+def pad_r(string, size)
+  pad = size - string.to_s.length
+  return " " * pad + "#{string}"
+end
+
 class Float
 
   def rnd_2
-    (self.to_f*100).round / 100.0
+    (self*100).round / 100.0
   end
-end
-
-class String
-
-  def pad_l(size)
-    pad = size - self.to_s.length
-    return "#{self}" + " " * pad
-  end
-
 end

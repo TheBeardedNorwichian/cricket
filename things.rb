@@ -72,7 +72,7 @@ class Player < GameComponents
   end
 
   def strike_rate
-    ((@stats_batting[:runs_scored].to_f / @stats_batting[:balls_faced].to_f) * 100).to_f.rnd_2
+    ((@stats_batting[:runs_scored].to_f / @stats_batting[:balls_faced].to_f) * 100).rnd_2 
   end
 
   def economy

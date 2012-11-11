@@ -16,17 +16,17 @@ module Output
   end
 
   def over_heading
-    puts "Over: #{@over_id} - Bowler: #{@bowler.name}"
+    puts "Over: #{@over_id} - Bowler: #{@bowler.name}".blue
   end
 
   def show_ball
-    puts "  Ball: #{@ball_in_over} - #{@facing_batsman.name} - #{@facing_batsman.stats_batting[:runs_scored]} |  #{show_wicket}"
-    sleep 1
+    puts "  Ball: #{@ball_in_over}      -      #{show_wicket}     | #{pad_l(@facing_batsman.name,20)} - #{pad_r(@facing_batsman.stats_batting[:runs_scored],3)}"
+    #sleep 0.1
   end
   
   def show_wicket
     if @facing_batsman.stats_batting[:out] == true 
-      return "Wicket! - Bowled by #{@bowler.name}".red 
+      return "Wicket!".red 
     else 
       return "Runs: #{@runs_scored}"
     end
@@ -50,7 +50,7 @@ module Output
 
   def end_of_innings_stats
     @batted_batters.each do |b|
-      puts "#{b.name.pad_l(20)} - #{pad_l(b.stats_batting[:wicket_taker],40)} #{pad_r(b.stats_batting[:runs_scored],3)} | #{pad_r(b.stats_batting[:balls_faced],3)} | #{pad_r(b.strike_rate,6)} | #{pad_r(b.stats_batting[:fours_hit],2)} | #{pad_r(b.stats_batting[:sixes_hit],2)} "
+      puts "#{pad_l(b.name,20)} - #{pad_l(b.stats_batting[:wicket_taker],40)} #{pad_r(b.stats_batting[:runs_scored],3).yellow} | #{pad_r(b.stats_batting[:balls_faced],3)} | #{pad_r(b.strike_rate,6)} | #{pad_r(b.stats_batting[:fours_hit],2)} | #{pad_r(b.stats_batting[:sixes_hit],2)} "
     end
     puts ""
     if @wickets == 10
@@ -61,20 +61,10 @@ module Output
     puts ""
     puts "B O W L I N G   S T A T S"
     puts ""
-    @all_bowlers.each do |b|
-      puts "#{pad_l(b.name,20)} | #{pad_r(b.stats_bowling[:overs],2)} | #{pad_r(b.stats_bowling[:deliveries],3)} | #{pad_r(b.stats_bowling[:wickets],2)} | #{pad_r(b.stats_bowling[:runs_scored],2)} | #{pad_r(b.economy,5)} | #{pad_r(b.stats_bowling[:no_balls],2)} | #{pad_r(b.stats_bowling[:wides],2)}"
+    @bowled_bowlers.each do |b|
+      puts "#{pad_l(b.name,20)} | #{pad_r(b.stats_bowling[:overs],3)} | #{pad_r(b.stats_bowling[:deliveries],4)} | #{pad_r(b.stats_bowling[:wickets],2)} | #{pad_r(b.stats_bowling[:runs_scored],3  )} | #{pad_r(b.economy,5)} | #{pad_r(b.stats_bowling[:no_balls],2)} | #{pad_r(b.stats_bowling[:wides],2)}"
     end
     puts ""
-  end
-
-  def pad_l(string, size)
-    pad = size - string.to_s.length
-    return "#{string}" + " " * pad
-  end
-
-  def pad_r(string, size)
-    pad = size - string.to_s.length
-    return " " * pad + "#{string}"
   end
 
   def column_width(string)
