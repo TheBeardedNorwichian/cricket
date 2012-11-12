@@ -1,8 +1,0 @@
-load 'output.rb'
-load 'attributes.rb'
-load 'main.rb'
-load 'attributes.rb'
-load 'things.rb'
-load 'functions.rb'
-load 'control.rb'
-load 'colorize/lib/colorize.rb'
