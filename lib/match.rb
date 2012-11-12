@@ -1,11 +1,13 @@
+require 'control.rb'
+
 class Match < GameComponents
   attr_accessor :team1, :team2, :current_innings, :target
   attr_reader :match_arr
 
   def initialize(total_overs = 90)
     @match_arr        = []
-    @team1            = Team.new('team1.csv',"Bond Street CC")
-    @team2            = Team.new('team2.csv',"England")
+    @team1            = Team.new('./lib/team1.csv',"Bond Street CC")
+    @team2            = Team.new('./lib/team2.csv',"England")
     @ground           = Ground.new()
     @total_overs      = total_overs
     @first_innings    = nil

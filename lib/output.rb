@@ -50,7 +50,7 @@ module Output
 
   def end_of_innings_stats
     @batted_batters.each do |b|
-      puts "#{pad_l(b.name,20)} - #{pad_l(b.stats_batting[:wicket_taker],40)} #{pad_r(b.stats_batting[:runs_scored],3).yellow} | #{pad_r(b.stats_batting[:balls_faced],3)} | #{pad_r(b.strike_rate,6)} | #{pad_r(b.stats_batting[:fours_hit],2)} | #{pad_r(b.stats_batting[:sixes_hit],2)} "
+      puts "#{pad_l(b.name,20)} - #{pad_l(b.stats_batting[:wicket_taker],40)} #{pad_r(b.stats_batting[:runs_scored],3)} | #{pad_r(b.stats_batting[:balls_faced],3)} | #{pad_r(b.strike_rate,6)} | #{pad_r(b.stats_batting[:fours_hit],2)} | #{pad_r(b.stats_batting[:sixes_hit],2)} "
     end
     puts ""
     if @wickets == 10

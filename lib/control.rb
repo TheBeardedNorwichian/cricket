@@ -1,7 +1,14 @@
-class GameComponents
-  include Output
-  include Attributes
-end
+$: << File.dirname(__FILE__)
+
+require 'output'
+require 'game_components'
+require 'things'
+require 'functions'
+require 'match'
+require 'innings'
+require 'over'
+require 'delivery'
+require 'hit'
 
 class Control < GameComponents
   attr_accessor :match
