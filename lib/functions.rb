@@ -37,15 +37,6 @@ def show_age(dob)
   now.year - true_dob.year
 end
 
-def coin_toss
-  x = rand(100)
-  if x % 2 == 0
-    true 
-  else
-    false
-  end
-end
-
 def pad_l(string, size)
   pad = size - string.to_s.length
   return "#{string}" + " " * pad
@@ -57,7 +48,6 @@ def pad_r(string, size)
 end
 
 class Float
-
   def rnd_2
     (self*100).round / 100.0
   end

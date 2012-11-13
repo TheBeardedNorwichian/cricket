@@ -15,7 +15,7 @@ class Innings < GameComponents
     @score            = 0
     @wickets          = 0
     @current_over     = nil
-    @current_over_num = 0
+    @current_over_num = 1
     @current_bowler   = nil
     @innings          = []
     @all_bowlers      = []
@@ -36,11 +36,11 @@ class Innings < GameComponents
   def run_overs
     catch (:in_over) do
       @total_overs.times do
+        batting_stats
         new_over
         @current_over.run_over
         @innings << @current_over
         new_score
-        #show_over_summary
         if @current_over.innings_over == true
           throw :in_over
         end
@@ -49,9 +49,11 @@ class Innings < GameComponents
     end
     batters_who_batted
     bowlers_who_bowled
+    overs_decimal
   end
 
-  def close_over
+  def close_over#
+    show_over_summary
     @current_over_num += 1
     facing
   end
@@ -107,9 +109,9 @@ class Innings < GameComponents
 
   def overs_decimal
     if @current_over.ball_in_over == 7
-    @over_decimal = "#{@current_over_num}"
+    @over_decimal = "#{@current_over_num - 1}"
     else  
-    @over_decimal = "#{@current_over_num}.#{@current_over.ball_in_over}"
+    @over_decimal = "#{@current_over_num - 1}.#{@current_over.ball_in_over}"
     end
   end
 

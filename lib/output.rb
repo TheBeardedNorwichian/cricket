@@ -16,28 +16,36 @@ module Output
   end
 
   def over_heading
-    puts "Over: #{@over_id} - Bowler: #{@bowler.name}".blue
+    system 'clear'
+    if Control.details == true
+      puts "Over: #{@over_id} - Bowler: #{@bowler.name}"
+    end
   end
 
   def show_ball
-    puts "  Ball: #{@ball_in_over}      -      #{show_wicket}     | #{pad_l(@facing_batsman.name,20)} - #{pad_r(@facing_batsman.stats_batting[:runs_scored],3)}"
-    #sleep 0.1
+    if Control.details == true
+      puts "  Ball: #{@ball_in_over}      -      #{show_wicket}     | #{pad_l(@facing_batsman.name,20)} - #{pad_r(@facing_batsman.stats_batting[:runs_scored],3)}"
+      sleep 0.5
+    end
   end
   
   def show_wicket
     if @facing_batsman.stats_batting[:out] == true 
-      return "Wicket!".red 
+      return "Wicket!"
     else 
       return "Runs: #{@runs_scored}"
     end
   end
 
   def show_over_summary
-    puts "Runs from the over:    #{@current_over.o_runs}"
-    puts "Wickets from the over: #{@current_over.wickets}"
-    puts "Score:                 #{@score} / #{@wickets}"  
-    puts "Run rate:              #{runs_per_over}"
-    puts ""
+    if Control.details == true
+      puts "Runs from the over:    #{@current_over.o_runs}"
+      puts "Wickets from the over: #{@current_over.wickets}"
+      puts "Score:                 #{@score} / #{@wickets}"  
+      puts "Run rate:              #{runs_per_over}"
+      puts ""
+      sleep 5
+    end
   end
 
   def innings_summary
@@ -49,6 +57,12 @@ module Output
   end   
 
   def end_of_innings_stats
+    batting_stats
+    puts ""
+    bowling_stats
+  end
+
+  def batting_stats
     @batted_batters.each do |b|
       puts "#{pad_l(b.name,20)} - #{pad_l(b.stats_batting[:wicket_taker],40)} #{pad_r(b.stats_batting[:runs_scored],3)} | #{pad_r(b.stats_batting[:balls_faced],3)} | #{pad_r(b.strike_rate,6)} | #{pad_r(b.stats_batting[:fours_hit],2)} | #{pad_r(b.stats_batting[:sixes_hit],2)} "
     end
@@ -58,21 +72,13 @@ module Output
     else
       puts " - #{@score} for #{@wickets} (#{@over_decimal} overs) at #{runs_per_over} runs per over."
     end
-    puts ""
-    puts "B O W L I N G   S T A T S"
-    puts ""
-    @bowled_bowlers.each do |b|
-      puts "#{pad_l(b.name,20)} | #{pad_r(b.stats_bowling[:overs],3)} | #{pad_r(b.stats_bowling[:deliveries],4)} | #{pad_r(b.stats_bowling[:wickets],2)} | #{pad_r(b.stats_bowling[:runs_scored],3  )} | #{pad_r(b.economy,5)} | #{pad_r(b.stats_bowling[:no_balls],2)} | #{pad_r(b.stats_bowling[:wides],2)}"
-    end
-    puts ""
   end
 
-  def column_width(string)
-    max_width = []
-    column.each do |x|
-      max_width << x.length
+  def bowling_stats
+    @bowled_bowlers.each do |b|
+      puts "#{pad_l(b.name,20)} | #{pad_r(b.stats_bowling[:overs],3)} | #{pad_r(b.stats_bowling[:maidens],3)} | #{pad_r(b.stats_bowling[:wickets],2)} | #{pad_r(b.stats_bowling[:runs_scored],3  )} | #{pad_r(b.economy,5)} | #{pad_r(b.stats_bowling[:no_balls],2)} | #{pad_r(b.stats_bowling[:wides],2)}"
     end
-    return max_width.max
+    puts ""
   end
 
   def format(float)
@@ -80,7 +86,7 @@ module Output
   end
 
   def runs_per_over
-    (@score.to_f/@current_over_num.to_f).rnd_2
+    (@score.to_f / @current_over_num.to_f).rnd_2
   end
 
 end

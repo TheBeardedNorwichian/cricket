@@ -22,7 +22,7 @@ class Delivery < GameComponents
   def bowl_ball
     #bowl ball
     is_hit
-    #show_ball
+    show_ball
   end
 
   def random
@@ -31,7 +31,7 @@ class Delivery < GameComponents
 
   def is_hit
     r = random
-    if r < 96
+    if r < 98
       @hit = Hit.new(@facing_batsman, @bowler)
       @runs_scored = @hit.b_runs
       if @runs_scored == 0

@@ -58,6 +58,7 @@ class Player < GameComponents
     @stats_bowling = {
         overs:        0,
         deliveries:   0, 
+        maidens:      0,
         runs_scored:  0,
         wickets:      0,
         wides:        0,

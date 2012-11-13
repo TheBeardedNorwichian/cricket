@@ -21,7 +21,7 @@ class Over < GameComponents
   end
 
   def run_over
-    #over_heading
+    over_heading
     @ball_in_over = 1
     while @balls.length < 6 do 
       @ball = Delivery.new(@ball_in_over, @bowler, @facing_b, @non_striker)
@@ -36,11 +36,18 @@ class Over < GameComponents
       @ball_in_over += 1
       facing
     end
+    check_for_maiden
   end
 
   def runs_in_over
     @o_runs += @ball.runs_scored
     @score += @ball.runs_scored
+  end
+
+  def check_for_maiden
+    if @o_runs == 0
+      @bowler.stats_bowling[:maidens] += 1
+    end
   end
 
   def check_for_wicket
