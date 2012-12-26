@@ -36,7 +36,6 @@ class Innings < GameComponents
   def run_overs
     catch (:in_over) do
       @total_overs.times do
-        batting_stats
         new_over
         @current_over.run_over
         @innings << @current_over
@@ -50,6 +49,10 @@ class Innings < GameComponents
     batters_who_batted
     bowlers_who_bowled
     overs_decimal
+    @batting_team.score = {
+      runs:     @score,
+      wickets:  @wickets
+    }
   end
 
   def close_over#

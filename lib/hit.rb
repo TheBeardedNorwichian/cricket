@@ -7,7 +7,7 @@ class Hit < GameComponents
   end
 
   def get_score
-    @b_runs = random_run_engine(0)#(@batsman.batting_attr[:batting])
+    @b_runs = random_run_engine(@batsman.batting_attr[:batting])
     if @b_runs > 0
       @batsman.stats_batting[:runs_scored] += @b_runs
       @bowler.stats_bowling[:runs_scored] += @b_runs

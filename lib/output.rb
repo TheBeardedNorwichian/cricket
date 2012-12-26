@@ -16,7 +16,6 @@ module Output
   end
 
   def over_heading
-    system 'clear'
     if Control.details == true
       puts "Over: #{@over_id} - Bowler: #{@bowler.name}"
     end
@@ -25,7 +24,7 @@ module Output
   def show_ball
     if Control.details == true
       puts "  Ball: #{@ball_in_over}      -      #{show_wicket}     | #{pad_l(@facing_batsman.name,20)} - #{pad_r(@facing_batsman.stats_batting[:runs_scored],3)}"
-      sleep 0.5
+      sleep 0.1
     end
   end
   
@@ -44,7 +43,9 @@ module Output
       puts "Score:                 #{@score} / #{@wickets}"  
       puts "Run rate:              #{runs_per_over}"
       puts ""
-      sleep 5
+      sleep 3
+      system 'cls'
+      system 'clear'
     end
   end
 

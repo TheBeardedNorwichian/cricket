@@ -14,6 +14,7 @@ class Ground < GameComponents
 end
 
 class Team < GameComponents
+  attr_accessor :score
   attr_reader :team_name, :country, :ground, :players, :team
 
   def initialize(data, team_name, country ="England", county="Norfolk",ground="Lords")
@@ -24,6 +25,10 @@ class Team < GameComponents
     @ground = ground
     @data = data
     load_data
+    @score = {
+      runs:         0,
+      wickets:      0
+    }
   end
 
   def load_data
