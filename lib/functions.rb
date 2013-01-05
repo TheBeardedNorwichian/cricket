@@ -5,7 +5,7 @@ def read_in_csv_data(dest, csv_file_name)
 end
 
 def random_run_engine(bat_var)
-  y = rand(100) - 10
+  y = rand(100) - 20
   x = y + bat_var
 
   one_run       = 70
@@ -14,7 +14,7 @@ def random_run_engine(bat_var)
   four_runs     = 93
   six_runs      = 99
 
-  if x >=0 && x < one_run
+  if x >= 0 && x < one_run
     return 0
   elsif x >= one_run && x < two_runs
     return 1

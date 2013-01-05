@@ -1,6 +1,6 @@
 class Innings < GameComponents
   attr_accessor :score, :wickets, :current_over, :partnership
-  attr_reader :innings, :batting_team, :fielding_team, :total_overs, :name, :fall_of_wicket, :over_decimal
+  attr_reader :innings, :batting_team, :fielding_team, :total_overs, :name, :over_decimal
 
   def initialize(name,batting_team, fielding_team, total_overs, target = 0)
     @batting_team     = batting_team
@@ -21,9 +21,6 @@ class Innings < GameComponents
     @all_bowlers      = []
     @batted_batters   = []
     @bowled_bowlers   = []
-    @fall_of_wicket   = []
-    @patnership       = {}
-    @fall_of_wicket
     all_bowlers
   end
 
@@ -49,10 +46,6 @@ class Innings < GameComponents
     batters_who_batted
     bowlers_who_bowled
     overs_decimal
-    @batting_team.score = {
-      runs:     @score,
-      wickets:  @wickets
-    }
   end
 
   def close_over#
@@ -62,7 +55,7 @@ class Innings < GameComponents
   end
 
   def new_over
-    @current_over = Over.new(pick_bowler, @facing_b, @non_striker, @current_over_num, @batting_team, @target, @score)
+    @current_over = Over.new(pick_bowler, @facing_b, @non_striker, @current_over_num, @batting_team, @target, @score, @wickets)
   end
 
   def new_score

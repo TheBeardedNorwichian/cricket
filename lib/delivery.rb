@@ -31,7 +31,7 @@ class Delivery < GameComponents
 
   def is_hit
     r = random
-    if r < 98
+    if r != 28
       @hit = Hit.new(@facing_batsman, @bowler)
       @runs_scored = @hit.b_runs
       if @runs_scored == 0

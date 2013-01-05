@@ -25,15 +25,14 @@ class Team < GameComponents
     @ground = ground
     @data = data
     load_data
-    @score = {
-      runs:         0,
-      wickets:      0
-    }
+    @score = {}
   end
 
   def load_data
     read_in_csv_data(@players, @data)
   end
+
+
 end
 
 

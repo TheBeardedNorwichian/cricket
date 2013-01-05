@@ -1,23 +1,24 @@
 class Over < GameComponents
   attr_accessor :facing_b, :non_striker
   attr_reader :balls, :o_runs, :wickets, :bowler, :ball, 
-    :over_id, :score, :innings_over, :ball_in_over
+    :over_id, :score, :innings_over, :ball_in_over, :batting_team
 
-  def initialize(bowler, current_batter_1, current_batter_2, over_id, batting_team, target, score)
-    @balls        = []
-    @o_runs       = 0
-    @wickets      = 0
-    @score        = score
-    @target       = target
-    @bowler       = bowler
-    @facing_b     = current_batter_1
-    @non_striker  = current_batter_2
-    @batting_team = batting_team
-    @over_id      = over_id
-    @ball         = nil
+  def initialize(bowler, current_batter_1, current_batter_2, over_id, batting_team, target, score, wickets)
+    @balls          = []
+    @o_runs         = 0
+    @wickets        = 0
+    @total_wickets  = wickets
+    @score          = score
+    @target         = target
+    @bowler         = bowler
+    @facing_b       = current_batter_1
+    @non_striker    = current_batter_2
+    @batting_team   = batting_team
+    @over_id        = over_id
+    @ball           = nil
+    @innings_over   = false
+    @ball_in_over   = nil
     @bowler.stats_bowling[:overs] += 1
-    @innings_over = false
-    @ball_in_over = nil
   end
 
   def run_over
@@ -53,6 +54,7 @@ class Over < GameComponents
   def check_for_wicket
     if @ball.facing_batsman.stats_batting[:out] == true
       @wickets += 1
+      @total_wickets += 1
       @batting_team.players.each do |batter|
         if batter.stats_batting[:out] == false && batter.stats_batting[:batted] == false
           @facing_b = batter
@@ -60,6 +62,7 @@ class Over < GameComponents
           break
         end
       end
+      @batting_team.score[@total_wickets.to_s.to_sym] = @score
     end
   end
 

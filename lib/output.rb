@@ -58,8 +58,8 @@ module Output
   end   
 
   def end_of_innings_stats
-    batting_stats
-    puts ""
+    batting_stats 
+    fall_of_wicket
     bowling_stats
   end
 
@@ -73,9 +73,18 @@ module Output
     else
       puts " - #{@score} for #{@wickets} (#{@over_decimal} overs) at #{runs_per_over} runs per over."
     end
+    puts ""
+  end
+
+  def fall_of_wicket
+    @batting_team.score.each do |x, y|
+      print "#{x}-#{y} | "
+    end
   end
 
   def bowling_stats
+    puts ""
+    puts""
     @bowled_bowlers.each do |b|
       puts "#{pad_l(b.name,20)} | #{pad_r(b.stats_bowling[:overs],3)} | #{pad_r(b.stats_bowling[:maidens],3)} | #{pad_r(b.stats_bowling[:wickets],2)} | #{pad_r(b.stats_bowling[:runs_scored],3  )} | #{pad_r(b.economy,5)} | #{pad_r(b.stats_bowling[:no_balls],2)} | #{pad_r(b.stats_bowling[:wides],2)}"
     end
