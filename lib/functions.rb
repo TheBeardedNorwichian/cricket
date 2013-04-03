@@ -8,9 +8,9 @@ def random_run_engine(bat_var)
   y = rand(100) - 20
   x = y + bat_var
 
-  one_run       = 70
-  two_runs      = 85
-  three_runs    = 91
+  one_run       = 50
+  two_runs      = 75
+  three_runs    = 85
   four_runs     = 93
   six_runs      = 99
 

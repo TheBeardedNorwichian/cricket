@@ -37,7 +37,7 @@ end
 
 
 class Player < GameComponents
-  attr_accessor :stats_batting, :stats_bowling, :stats_fielding
+  attr_accessor :stats_batting, :stats_bowling, :stats_fielding, :bowl_ball, :energy, :hit, :b_runs, :ball
   attr_reader :name, :dob, :hand, :age, :type, :batting_attr
 
   def initialize(name, dob, hand, type, bat_var)
@@ -46,6 +46,7 @@ class Player < GameComponents
     @hand = hand
     @age = show_age(@dob)
     @type = type
+    @energy = 100
     @batting_attr = {
         batting:      bat_var.to_i
     }
@@ -83,4 +84,24 @@ class Player < GameComponents
   def economy
     (@stats_bowling[:runs_scored].to_f / @stats_bowling[:overs].to_f).to_f.rnd_2
   end
+
+  def bowl
+    #needs developing
+    @ball = rand(100)
+    @energy =- 1
+  end
+
+  def hit
+    @b_runs = random_run_engine(@batting_attr[:batting])
+    if @b_runs > 0
+      @stats_batting[:runs_scored] += @b_runs
+      if @b_runs == 4
+        @stats_batting[:fours_hit] += 1
+      end
+      if @b_runs == 6
+        @stats_batting[:sixes_hit] += 1
+      end
+    end
+  end
+
 end
