@@ -48,7 +48,7 @@ class Innings < GameComponents
     overs_decimal
   end
 
-  def close_over#
+  def close_over
     show_over_summary
     @current_over_num += 1
     facing
@@ -63,23 +63,23 @@ class Innings < GameComponents
     @wickets = @wickets + @current_over.wickets
   end
 
-  def pick_bowler
-    bowlers = []
-    @fielding_team.players.each do |pl|
-      if pl.type == "Bowler" || pl.type == "All Rounder"
-        bowlers << pl
-      end
-    end
-    bowlers.delete(@current_bowler)
-    @current_bowler = bowlers.sample
-  end
-
   def all_bowlers
     @fielding_team.players.each do |pl|
       if pl.type == "Bowler" || pl.type == "All Rounder"
         @all_bowlers << pl
       end
     end
+  end
+
+  def pick_bowler
+    potential_bowlers = []
+    @fielding_team.players.each do |pl|
+      if pl.type == "Bowler" || pl.type == "All Rounder"
+        potential_bowlers << pl
+      end
+    end
+    potential_bowlers.delete(@current_bowler)
+    @current_bowler = potential_bowlers.sample
   end
 
   def facing

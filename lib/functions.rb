@@ -1,18 +1,12 @@
-def read_in_csv_data(dest, csv_file_name)
-  CSV.foreach(csv_file_name, headers: true) do |row|
-    dest << Player.new(row["name"], row["dob"], row["hand"], row["type"], row["bat_var"])
-  end
-end
-
 def random_run_engine(bat_var)
   y = rand(100) - 20
   x = y + bat_var
 
   one_run       = 50
   two_runs      = 75
-  three_runs    = 85
-  four_runs     = 93
-  six_runs      = 99
+  three_runs    = 88
+  four_runs     = 91
+  six_runs      = 98
 
   if x >= 0 && x < one_run
     return 0

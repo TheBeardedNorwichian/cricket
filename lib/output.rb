@@ -84,9 +84,9 @@ module Output
 
   def bowling_stats
     puts ""
-    puts""
+    puts ""
     @bowled_bowlers.each do |b|
-      puts "#{pad_l(b.name,20)} | #{pad_r(b.stats_bowling[:overs],3)} | #{pad_r(b.stats_bowling[:maidens],3)} | #{pad_r(b.stats_bowling[:wickets],2)} | #{pad_r(b.stats_bowling[:runs_scored],3  )} | #{pad_r(b.economy,5)} | #{pad_r(b.stats_bowling[:no_balls],2)} | #{pad_r(b.stats_bowling[:wides],2)}"
+      puts "#{pad_l(b.name,20)} - #{b.energy} | #{pad_r(b.stats_bowling[:overs],3)} | #{pad_r(b.stats_bowling[:maidens],3)} | #{pad_r(b.stats_bowling[:wickets],2)} | #{pad_r(b.stats_bowling[:runs_scored],3  )} | #{pad_r(b.economy,5)} | #{pad_r(b.stats_bowling[:no_balls],2)} | #{pad_r(b.stats_bowling[:wides],2)}"
     end
     puts ""
   end

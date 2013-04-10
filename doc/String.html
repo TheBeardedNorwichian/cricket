@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class String - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>colorize/lib/colorize.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link"><a href="Object.html">Object</a>
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-color_matrix">::color_matrix</a>
+    
+    <li><a href="#method-c-colors">::colors</a>
+    
+    <li><a href="#method-c-modes">::modes</a>
+    
+    <li><a href="#method-i-colorize">#colorize</a>
+    
+    <li><a href="#method-i-colorized-3F">#colorized?</a>
+    
+    <li><a href="#method-i-set_color_parameters">#set_color_parameters</a>
+    
+    <li><a href="#method-i-uncolorize">#uncolorize</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./colorize/CHANGELOG_rdoc.html">CHANGELOG</a>
+  
+    <li class="file"><a href="./colorize/README_rdoc.html">README</a>
+  
+    <li class="file"><a href="./colorize/Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="./colorize/VERSION.html">VERSION</a>
+  
+    <li class="file"><a href="./todo.html">todo</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Attributes.html">Attributes</a>
+  
+    <li><a href="./Attributes/Score.html">Attributes::Score</a>
+  
+    <li><a href="./Control.html">Control</a>
+  
+    <li><a href="./Delivery.html">Delivery</a>
+  
+    <li><a href="./Float.html">Float</a>
+  
+    <li><a href="./GameComponents.html">GameComponents</a>
+  
+    <li><a href="./Ground.html">Ground</a>
+  
+    <li><a href="./Hit.html">Hit</a>
+  
+    <li><a href="./Innings.html">Innings</a>
+  
+    <li><a href="./Match.html">Match</a>
+  
+    <li><a href="./Object.html">Object</a>
+  
+    <li><a href="./Output.html">Output</a>
+  
+    <li><a href="./Over.html">Over</a>
+  
+    <li><a href="./Player.html">Player</a>
+  
+    <li><a href="./Score.html">Score</a>
+  
+    <li><a href="./String.html">String</a>
+  
+    <li><a href="./Team.html">Team</a>
+  
+    <li><a href="./TestColorize.html">TestColorize</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class String</h1>
+
+  <div id="description" class="description">
+    
+<p>Colorize <a href="String.html">String</a> class extension.</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="COLORS">COLORS
+        
+        <dd class="description"><p>Colors Hash</p>
+        
+      
+        <dt id="MODES">MODES
+        
+        <dd class="description"><p>Modes Hash</p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-color_matrix" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">color_matrix</span><span
+            class="method-args">( txt = "[X]" )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Display color matrix with color names.</p>
+          
+
+          
+          <div class="method-source-code" id="color_matrix-source">
+            <pre><span class="ruby-comment"># File colorize/lib/colorize.rb, line 177</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">color_matrix</span>( <span class="ruby-identifier">txt</span> = <span class="ruby-string">&quot;[X]&quot;</span> )
+  <span class="ruby-identifier">size</span> = <span class="ruby-constant">String</span>.<span class="ruby-identifier">colors</span>.<span class="ruby-identifier">length</span>
+  <span class="ruby-constant">String</span>.<span class="ruby-identifier">colors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">color</span> <span class="ruby-operator">|</span>
+    <span class="ruby-constant">String</span>.<span class="ruby-identifier">colors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">back</span> <span class="ruby-operator">|</span>
+     <span class="ruby-identifier">print</span> <span class="ruby-identifier">txt</span>.<span class="ruby-identifier">colorize</span>( <span class="ruby-value">:color</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">color</span>, <span class="ruby-value">:background</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">back</span> )
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot; &lt; #{color}&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-constant">String</span>.<span class="ruby-identifier">colors</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">back</span>, <span class="ruby-identifier">index</span> <span class="ruby-operator">|</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{&quot;|&quot;.rjust(txt.length)*(size-index)} &lt; #{back}&quot;</span>
+  <span class="ruby-keyword">end</span> 
+  <span class="ruby-string">&quot;&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- color_matrix-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- color_matrix-method -->
+
+    
+      <div id="method-c-colors" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">colors</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return array of available colors used by colorize method</p>
+          
+
+          
+          <div class="method-source-code" id="colors-source">
+            <pre><span class="ruby-comment"># File colorize/lib/colorize.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">colors</span>
+  <span class="ruby-identifier">keys</span> = []
+  <span class="ruby-constant">COLORS</span>.<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">|</span>
+    <span class="ruby-identifier">keys</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">key</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">keys</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- colors-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- colors-method -->
+
+    
+      <div id="method-c-modes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">modes</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return array of available modes used by colorize method</p>
+          
+
+          
+          <div class="method-source-code" id="modes-source">
+            <pre><span class="ruby-comment"># File colorize/lib/colorize.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">modes</span>
+  <span class="ruby-identifier">keys</span> = []
+  <span class="ruby-constant">MODES</span>.<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">|</span>
+    <span class="ruby-identifier">keys</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">key</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">keys</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- modes-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- modes-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-colorize" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">colorize</span><span
+            class="method-args">( params )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Change color of string</p>
+
+<p>Examples:</p>
+
+<pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;This is blue&quot;</span>.<span class="ruby-identifier">colorize</span>( :<span class="ruby-identifier">blue</span> )
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;This is light blue&quot;</span>.<span class="ruby-identifier">colorize</span>( :<span class="ruby-identifier">light_blue</span> )
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;This is also blue&quot;</span>.<span class="ruby-identifier">colorize</span>( :<span class="ruby-identifier">color</span> =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">blue</span> )
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;This is light blue with red background&quot;</span>.<span class="ruby-identifier">colorize</span>( :<span class="ruby-identifier">color</span> =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">light_blue</span>, :<span class="ruby-identifier">background</span> =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">red</span> )
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;This is light blue with red background&quot;</span>.<span class="ruby-identifier">colorize</span>( :<span class="ruby-identifier">light_blue</span> ).<span class="ruby-identifier">colorize</span>( :<span class="ruby-identifier">background</span> =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">red</span> )
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;This is blue text on red&quot;</span>.<span class="ruby-identifier">blue</span>.<span class="ruby-identifier">on_red</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;This is red on blue&quot;</span>.<span class="ruby-identifier">colorize</span>( :<span class="ruby-identifier">red</span> ).<span class="ruby-identifier">on_blue</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;This is red on blue and underline&quot;</span>.<span class="ruby-identifier">colorize</span>( :<span class="ruby-identifier">red</span> ).<span class="ruby-identifier">on_blue</span>.<span class="ruby-identifier">underline</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;This is blue text on red&quot;</span>.<span class="ruby-identifier">blue</span>.<span class="ruby-identifier">on_red</span>.<span class="ruby-identifier">blink</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;This is uncolorized&quot;</span>.<span class="ruby-identifier">blue</span>.<span class="ruby-identifier">on_red</span>.<span class="ruby-identifier">uncolorize</span>
+</pre>
+          
+
+          
+          <div class="method-source-code" id="colorize-source">
+            <pre><span class="ruby-comment"># File colorize/lib/colorize.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">colorize</span>( <span class="ruby-identifier">params</span> )
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">STDOUT</span>.<span class="ruby-identifier">isatty</span>
+  
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">require</span> <span class="ruby-string">'Win32/Console/ANSI'</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">RUBY_PLATFORM</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%rwin32/</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-string">'You must gem install win32console to use colorize on Windows'</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-identifier">color_parameters</span> = {}
+
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">params</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-constant">Hash</span>))
+    <span class="ruby-identifier">color_parameters</span>[<span class="ruby-value">:color</span>] = <span class="ruby-constant">COLORS</span>[<span class="ruby-identifier">params</span>[<span class="ruby-value">:color</span>]]
+    <span class="ruby-identifier">color_parameters</span>[<span class="ruby-value">:background</span>] = <span class="ruby-constant">COLORS</span>[<span class="ruby-identifier">params</span>[<span class="ruby-value">:background</span>]]
+    <span class="ruby-identifier">color_parameters</span>[<span class="ruby-value">:mode</span>] = <span class="ruby-constant">MODES</span>[<span class="ruby-identifier">params</span>[<span class="ruby-value">:mode</span>]]
+  <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">params</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-constant">Symbol</span>))
+    <span class="ruby-identifier">color_parameters</span>[<span class="ruby-value">:color</span>] = <span class="ruby-constant">COLORS</span>[<span class="ruby-identifier">params</span>]
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-identifier">color_parameters</span>[<span class="ruby-value">:color</span>] <span class="ruby-operator">||=</span> <span class="ruby-ivar">@color</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">COLORS</span>[<span class="ruby-value">:default</span>]
+  <span class="ruby-identifier">color_parameters</span>[<span class="ruby-value">:background</span>] <span class="ruby-operator">||=</span> <span class="ruby-ivar">@background</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">COLORS</span>[<span class="ruby-value">:default</span>]
+  <span class="ruby-identifier">color_parameters</span>[<span class="ruby-value">:mode</span>] <span class="ruby-operator">||=</span> <span class="ruby-ivar">@mode</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">MODES</span>[<span class="ruby-value">:default</span>]
+
+  <span class="ruby-identifier">color_parameters</span>[<span class="ruby-value">:uncolorized</span>] <span class="ruby-operator">||=</span> <span class="ruby-ivar">@uncolorized</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
+ 
+  <span class="ruby-comment"># calculate bright mode</span>
+  <span class="ruby-identifier">color_parameters</span>[<span class="ruby-value">:color</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">50</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">color_parameters</span>[<span class="ruby-value">:color</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span>
+
+  <span class="ruby-identifier">color_parameters</span>[<span class="ruby-value">:background</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">50</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">color_parameters</span>[<span class="ruby-value">:background</span>] <span class="ruby-operator">&gt;</span> <span class="ruby-value">10</span>
+
+  <span class="ruby-node">&quot;\0033[#{color_parameters[:mode]};#{color_parameters[:color]+30};#{color_parameters[:background]+40}m#{color_parameters[:uncolorized]}\0033[0m&quot;</span>.<span class="ruby-identifier">set_color_parameters</span>( <span class="ruby-identifier">color_parameters</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- colorize-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- colorize-method -->
+
+    
+      <div id="method-i-colorized-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">colorized?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return true if sting is colorized</p>
+          
+
+          
+          <div class="method-source-code" id="colorized-3F-source">
+            <pre><span class="ruby-comment"># File colorize/lib/colorize.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">colorized?</span>
+  <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@uncolorized</span>).<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- colorized-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- colorized-3F-method -->
+
+    
+      <div id="method-i-uncolorize" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">uncolorize</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Return uncolorized string</p>
+          
+
+          
+          <div class="method-source-code" id="uncolorize-source">
+            <pre><span class="ruby-comment"># File colorize/lib/colorize.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">uncolorize</span>
+  <span class="ruby-ivar">@uncolorized</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- uncolorize-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- uncolorize-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Protected Instance Methods</h3>
+
+    
+      <div id="method-i-set_color_parameters" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_color_parameters</span><span
+            class="method-args">( params )</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Set color values in new string intance</p>
+          
+
+          
+          <div class="method-source-code" id="set_color_parameters-source">
+            <pre><span class="ruby-comment"># File colorize/lib/colorize.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_color_parameters</span>( <span class="ruby-identifier">params</span> )
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">params</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-constant">Hash</span>))
+    <span class="ruby-ivar">@color</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:color</span>]
+    <span class="ruby-ivar">@background</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:background</span>]
+    <span class="ruby-ivar">@mode</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:mode</span>]
+    <span class="ruby-ivar">@uncolorized</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:uncolorized</span>]
+    <span class="ruby-keyword">self</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- set_color_parameters-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- set_color_parameters-method -->
+
+    
+    </section><!-- protected-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

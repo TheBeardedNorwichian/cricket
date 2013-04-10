@@ -1,14 +1,8 @@
 class Delivery < GameComponents
   attr_accessor :facing_batsman
-  attr_reader :pitch, :length, :speed, :spin, :seam, :status, 
-    :ball_in_over, :runs_scored
+  attr_reader :status, :ball_in_over, :runs_scored
 
   def initialize(ball_in_over, bowler, facing_batsman, non_striker)
-    #@pitch          = sprintf '%02d', random
-    #@length         = sprintf '%02d', random
-    #@speed          = sprintf '%02d', random
-    #@spin           = sprintf '%02d', random
-    #@seam           = sprintf '%02d', random
     @ball_in_over   = ball_in_over
     @bowler         = bowler
     @facing_batsman = facing_batsman
@@ -17,6 +11,7 @@ class Delivery < GameComponents
     @facing_batsman.stats_batting[:balls_faced] += 1
     @bowler.stats_bowling[:deliveries] += 1
     @fall_of_wicket = nil
+    @ball = nil
   end
 
   def bowl_ball
@@ -27,7 +22,8 @@ class Delivery < GameComponents
   end
 
   def is_hit
-    if @ball > 1
+    ball_sum = @ball[:length] + @ball[:pitch] + @ball[:speed]
+    if ball_sum > 50
       @facing_batsman.hit
       @runs_scored = @facing_batsman.b_runs
       if @runs_scored == 0

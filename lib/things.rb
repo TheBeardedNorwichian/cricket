@@ -32,13 +32,18 @@ class Team < GameComponents
     read_in_csv_data(@players, @data)
   end
 
+  def read_in_csv_data(dest, csv_file_name)
+    CSV.foreach(csv_file_name, headers: true) do |row|
+      dest << Player.new(row["name"], row["dob"], row["hand"], row["type"], row["bat_var"])
+    end
+  end
 
 end
 
 
 class Player < GameComponents
-  attr_accessor :stats_batting, :stats_bowling, :stats_fielding, :bowl_ball, :energy, :hit, :b_runs, :ball
-  attr_reader :name, :dob, :hand, :age, :type, :batting_attr
+  attr_accessor :stats_batting, :stats_bowling, :stats_fielding, :bowl_ball, :energy, :hit, :ball
+  attr_reader :name, :dob, :hand, :age, :type, :batting_attr, :enery, :b_runs
 
   def initialize(name, dob, hand, type, bat_var)
     @name = name
@@ -47,6 +52,7 @@ class Player < GameComponents
     @age = show_age(@dob)
     @type = type
     @energy = 100
+    @ball = {}
     @batting_attr = {
         batting:      bat_var.to_i
     }
@@ -87,8 +93,12 @@ class Player < GameComponents
 
   def bowl
     #needs developing
-    @ball = rand(100)
-    @energy =- 1
+    @ball = {
+      length:    rand(100),
+      pitch:     rand(100), 
+      speed:     rand(100)
+    }
+    @energy = @energy - 1
   end
 
   def hit
