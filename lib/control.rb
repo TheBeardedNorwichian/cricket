@@ -3,6 +3,7 @@ $: << File.dirname(__FILE__)
 require 'output'
 require 'game_components'
 require 'things'
+require 'player'
 require 'functions'
 require 'match'
 require 'innings'

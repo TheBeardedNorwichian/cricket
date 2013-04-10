@@ -15,30 +15,16 @@ class Delivery < GameComponents
   end
 
   def bowl_ball
-    @bowler.bowl
-    @ball = @bowler.ball
-    is_hit
+    #@bowler.bowl
+    #@ball = @bowler.ball
+    @facing_batsman.play(@bowler.bowl)
+    if @facing_batsman.stats_batting[:out] == true
+      @bowler.stats_bowling[:wickets] += 1
+      @facing_batsman.stats_batting[:wicket_taker] = @bowler.name
+    end
+    @runs_scored = @facing_batsman.b_runs 
+    @bowler.stats_bowling[:runs_scored] += @facing_batsman.b_runs
     show_ball
   end
 
-  def is_hit
-    ball_sum = @ball[:length] + @ball[:pitch] + @ball[:speed]
-    if ball_sum > 50
-      @facing_batsman.hit
-      @runs_scored = @facing_batsman.b_runs
-      if @runs_scored == 0
-        @facing_batsman.stats_batting[:dot_balls] += 1
-      end
-      @bowler.stats_bowling[:runs_scored] += @runs_scored
-    else
-      wicket
-      @runs_scored = 0
-    end
-  end
-
-  def wicket
-    @facing_batsman.stats_batting[:out] = true
-    @facing_batsman.stats_batting[:wicket_taker] = @bowler.name
-    @bowler.stats_bowling[:wickets] += 1
-  end
 end

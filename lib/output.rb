@@ -23,7 +23,7 @@ module Output
 
   def show_ball
     if Control.details == true
-      puts "  Ball: #{@ball_in_over}      -      #{show_wicket}     | #{pad_l(@facing_batsman.name,20)} - #{pad_r(@facing_batsman.stats_batting[:runs_scored],3)}"
+      puts "  Ball: #{@ball_in_over} - #{show_wicket}     | #{pad_l(@facing_batsman.name,20)} - #{pad_r(@facing_batsman.stats_batting[:runs_scored],3)}"
       sleep 0.1
     end
   end
