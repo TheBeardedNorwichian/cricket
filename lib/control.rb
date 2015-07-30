@@ -27,9 +27,12 @@ class Control < GameComponents
     @match.first_innings
     @match.current_innings.run_innings
     @match.target = @match.current_innings.score
+    @match.match_hash[@match.team1.team_name.to_sym] = @match.current_innings.score
     @match.second_innings
     @match.current_innings.run_innings
+    @match.match_hash[@match.team2.team_name.to_sym] = @match.current_innings.score
     @match.check_winner
+    puts @match.match_hash
   end
 
 end
