@@ -23,7 +23,7 @@ class Control < GameComponents
   end
 
   def self.go
-    @match = Match.new(50)
+    @match = Match.new(150)
     @match.first_innings
     @match.current_innings.run_innings
     @match.target = @match.current_innings.score

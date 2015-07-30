@@ -23,6 +23,7 @@ module Output
 
   def show_ball
     if Control.details == true
+      #end_of_innings_stats
       puts "  Ball: #{@ball_in_over} - #{show_wicket}     | #{pad_l(@facing_batsman.name,20)} - #{pad_r(@facing_batsman.stats_batting[:runs_scored],3)}"
       sleep 0.1
     end
@@ -65,7 +66,7 @@ module Output
 
   def batting_stats
     @batted_batters.each do |b|
-      puts "#{pad_l(b.name,20)} - #{pad_l(b.stats_batting[:wicket_taker],40)} #{pad_r(b.stats_batting[:runs_scored],3)} | #{pad_r(b.stats_batting[:balls_faced],3)} | #{pad_r(b.strike_rate,6)} | #{pad_r(b.stats_batting[:fours_hit],2)} | #{pad_r(b.stats_batting[:sixes_hit],2)} "
+      puts "#{pad_l(b.name,20)} - #{pad_l(b.stats_batting[:howout], 25)} #{pad_l(b.stats_batting[:wicket_taker],40)} #{pad_r(b.stats_batting[:runs_scored],3)} | #{pad_r(b.stats_batting[:balls_faced],3)} | #{pad_r(b.strike_rate,6)} | #{pad_r(b.stats_batting[:fours_hit],2)} | #{pad_r(b.stats_batting[:sixes_hit],2)} "
     end
     puts ""
     if @wickets == 10

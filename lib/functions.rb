@@ -46,3 +46,49 @@ class Float
     (self*100).round / 100.0
   end
 end
+
+def how_out(batsman, bowler, fielding_team)
+  
+  x = rand
+  wicket_keeper = ""
+  catchers = []
+  fielding_team.players.each do |pl|
+    if pl.type != "Wicket Keeper"
+      catchers << pl
+    else wicket_keeper = pl  
+    end
+  end
+
+  bowled        =  0.18
+  lbw           =  0.35
+  caught_behind =  0.53
+  caught        =  0.95
+  stumped       =  0.97
+
+  fielder = catchers.sample
+
+  if x >= 0 && x < bowled
+      batsman.stats_batting[:wicket_taker] = "b #{bowler.name}"
+      batsman.stats_batting[:howout] = ""
+      bowler.stats_bowling[:wickets] += 1
+    elsif x >= bowled && x < lbw
+      batsman.stats_batting[:wicket_taker] = "b #{bowler.name}"
+      batsman.stats_batting[:howout] = "lbw"
+      bowler.stats_bowling[:wickets] += 1
+    elsif x >= lbw && x < caught_behind 
+      batsman.stats_batting[:wicket_taker] = "b #{bowler.name}"
+      batsman.stats_batting[:howout] = "c #{wicket_keeper.name}"
+      bowler.stats_bowling[:wickets] += 1
+    elsif x >= caught_behind && x < caught
+      batsman.stats_batting[:wicket_taker] = "b #{bowler.name}"
+      batsman.stats_batting[:howout] = "c #{fielder.name}"
+      bowler.stats_bowling[:wickets] += 1
+    elsif x >= caught && x < stumped
+      batsman.stats_batting[:wicket_taker] = "b #{bowler.name}"
+      batsman.stats_batting[:howout] = "st #{wicket_keeper.name}"
+      bowler.stats_bowling[:wickets] += 1
+    else x >= stumped 
+      batsman.stats_batting[:wicket_taker] = "Run out"
+      batsman.stats_batting[:howout] = "Run Out (#{fielder.name})"
+  end
+end

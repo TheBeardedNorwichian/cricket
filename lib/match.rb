@@ -6,8 +6,8 @@ class Match < GameComponents
 
   def initialize(total_overs = 90)
     @match_arr        = []
-    @team1            = Team.new('./lib/team1.csv',"South Africa")
-    @team2            = Team.new('./lib/team2.csv',"England")
+    @team2            = Team.new('./lib/Teams/Australia.csv',"Australia")
+    @team1            = Team.new('./lib/Teams/England.csv',"England")
     @ground           = Ground.new()
     @total_overs      = total_overs
     @first_innings    = nil

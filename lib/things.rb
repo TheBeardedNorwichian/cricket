@@ -33,8 +33,8 @@ class Team < GameComponents
   end
 
   def read_in_csv_data(dest, csv_file_name)
-    CSV.foreach(csv_file_name, headers: true) do |row|
-      dest << Player.new(row["name"], row["dob"], row["hand"], row["type"], row["bat_var"])
+    CSV.foreach(csv_file_name, headers: false) do |row|
+      dest << Player.new(row[0].strip, row[1].strip, row[2].strip, row[3].strip, row[4].strip, row[5].strip)
     end
   end
 

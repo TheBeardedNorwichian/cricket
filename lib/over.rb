@@ -3,7 +3,7 @@ class Over < GameComponents
   attr_reader :balls, :o_runs, :wickets, :bowler, :ball, 
     :over_id, :score, :innings_over, :ball_in_over, :batting_team
 
-  def initialize(bowler, current_batter_1, current_batter_2, over_id, batting_team, target, score, wickets)
+  def initialize(bowler, current_batter_1, current_batter_2, over_id, batting_team, target, score, wickets, fielding_team)
     @balls          = []
     @o_runs         = 0
     @wickets        = 0
@@ -14,6 +14,7 @@ class Over < GameComponents
     @facing_b       = current_batter_1
     @non_striker    = current_batter_2
     @batting_team   = batting_team
+    @fielding_team  = fielding_team
     @over_id        = over_id
     @ball           = nil
     @innings_over   = false
@@ -25,7 +26,7 @@ class Over < GameComponents
     over_heading
     @ball_in_over = 1
     while @balls.length < 6 do 
-      @ball = Delivery.new(@ball_in_over, @bowler, @facing_b, @non_striker)
+      @ball = Delivery.new(@ball_in_over, @bowler, @facing_b, @non_striker, @fielding_team)
       @ball.bowl_ball
       @balls << @ball
       runs_in_over
@@ -54,6 +55,7 @@ class Over < GameComponents
   def check_for_wicket
     if @ball.facing_batsman.stats_batting[:out] == true
       @wickets += 1
+      how_out(@facing_b, @bowler, @fielding_team)
       @total_wickets += 1
       @batting_team.players.each do |batter|
         if batter.stats_batting[:out] == false && batter.stats_batting[:batted] == false

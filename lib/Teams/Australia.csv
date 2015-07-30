@@ -1,12 +1,11 @@
-name,dob,hand,type,bat_var
-Shane Watson,17/06/1981,Right,Batter,18
-Chris Rogers,31/08/1977,Left,Batter,17
-Usman Khawaja,18/12/1986,Left,Batter,16
-Philip Hughes,30/11/1988,Left,Batter,17
-Michael Clarke,02/04/1981,Right,Batter,20
-Steven Smith,02/06/1989,Right,All Rounder,15
-Brad Haddin,23/10/1977,Right,Wicket Keeper,16
-Ashton Agar,14/10/1993,Right,Bowler,10
-Peter Siddle,25/11/1984,Right,Bowler,11
-James Pattinson,03/05/1990,Right,Bowler,8
-Ryan Harris,11/10/1979,Right,Bowler,4
+C Rogers      ,31/08/1977 ,Left   ,Batter       ,18 ,0
+D Warner      ,27/10/1986 ,Left   ,Batter       ,18 ,8
+S Smith       ,02/06/1989 ,Right  ,Batter       ,19 ,7
+M Clarke      ,02/04/1981 ,Right  ,Batter       ,17 ,5
+A Vogues      ,04/10/1979 ,Right  ,Batter       ,16 ,0
+M Marsh       ,20/10/1991 ,Right  ,All Rounder  ,17 ,11
+P Nevill      ,23/10/1985 ,Right  ,Wicket Keeper,14 ,0
+M Johnson     ,02/11/1981 ,Left   ,Bowler       ,12 ,19
+M Starc       ,30/10/1990 ,Left   ,Bowler       ,11 ,18
+J Hazelwood   ,08/01/1991 ,Left   ,Bowler       ,9  ,16
+N Lyon        ,20/11/1987 ,Right  ,Bowler       ,4  ,15

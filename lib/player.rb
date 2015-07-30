@@ -2,7 +2,7 @@ class Player < GameComponents
   attr_accessor :stats_batting, :stats_bowling, :stats_fielding, :energy, :hit, :ball
   attr_reader :name, :dob, :hand, :age, :type, :batting_attr, :enery, :b_runs
 
-  def initialize(name, dob, hand, type, bat_var)
+  def initialize(name, dob, hand, type, bat_var, bowl_var)
     @name = name
     @dob = dob
     @hand = hand
@@ -12,6 +12,9 @@ class Player < GameComponents
     @batting_attr = {
         batting:      bat_var.to_i
     }
+    @bowling_attr = {
+        bowling:      bowl_var.to_i
+    }
     @stats_batting = {
         batted:       false,
         balls_faced:  0, 
@@ -20,7 +23,8 @@ class Player < GameComponents
         fours_hit:    0,
         sixes_hit:    0,
         out:          false,
-        wicket_taker: "Not Out"
+        howout:       "Not out",
+        wicket_taker: ""
       }
     @stats_bowling = {
         overs:        0,
@@ -47,6 +51,11 @@ class Player < GameComponents
     (@stats_bowling[:runs_scored].to_f / @stats_bowling[:overs].to_f).to_f.rnd_2
   end
 
+
+  def wicket
+    @stats_batting[:out] = true
+    @b_runs = 0
+  end
 
 #--------------
 #bowling actions
@@ -75,9 +84,7 @@ class Player < GameComponents
         @stats_batting[:dot_balls] += 1
       end
     else
-      #hits stumps or not? below is temporary
-      @stats_batting[:out] = true
-      @b_runs = 0
+      wicket
     end
   end
 
@@ -97,3 +104,4 @@ class Player < GameComponents
   end
 
 end
+

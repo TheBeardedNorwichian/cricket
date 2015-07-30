@@ -1,12 +1,11 @@
-name,dob,hand,type,bat_var
-Alastair Cook,25/12/1984,Left,Batter,19
-Joe Root,30/12/1990,Right,Batter,17
-Johnathon Trott,22/04/1981,Right,Batter,18
-Kevin Pietersen,27/06/1980,Batter,18
-Ian Bell,11/04/1982,Right,Batter,16
-Jonny Bairstow,26/09/1989,Right,Batter,15
-Matt Prior,26/02/1982,Right,Wicket Keeper,16
-Stuart Broad,24/06/1986,Right,Bowler,10
-Graham Swann,24/03/1979,Right,Bowler,11
-James Anderson,30/07/1982,Right,Bowler,8
-Steve Finn,04/04/1989,Right,Bowler,4
+A Lyth        ,25/09/1987 ,Left   ,Batter       ,16 ,0
+A Cook        ,25/12/1984 ,Left   ,Batter       ,19 ,0
+I Bell        ,11/04/1982 ,Right  ,Batter       ,16 ,0
+J Root        ,30/12/1990 ,Right  ,Batter       ,17 ,11
+J Bairstow    ,26/09/1989 ,Right  ,Batter       ,15 ,0
+B Stokes      ,04/06/1991 ,Left   ,All Rounder  ,14 ,13
+J Butler      ,08/09/1990 ,Right  ,Wicket Keeper,14 ,0
+M Ali         ,18/06/1987 ,Left   ,All Rounder  ,14 ,12
+S Broad       ,24/06/1986 ,Right  ,Bowler       ,10 ,18
+M Wood        ,11/01/1990 ,Right  ,Bowler       ,10 ,16
+J Anderson    ,30/07/1982 ,Right  ,Bowler       ,8  ,19

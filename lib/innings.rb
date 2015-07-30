@@ -33,6 +33,7 @@ class Innings < GameComponents
   def run_overs
     catch (:in_over) do
       @total_overs.times do
+        pick_bowler
         new_over
         @current_over.run_over
         @innings << @current_over
@@ -55,7 +56,7 @@ class Innings < GameComponents
   end
 
   def new_over
-    @current_over = Over.new(pick_bowler, @facing_b, @non_striker, @current_over_num, @batting_team, @target, @score, @wickets)
+    @current_over = Over.new(@current_bowler, @facing_b, @non_striker, @current_over_num, @batting_team, @target, @score, @wickets, @fielding_team)
   end
 
   def new_score
@@ -79,7 +80,7 @@ class Innings < GameComponents
       end
     end
     potential_bowlers.delete(@current_bowler)
-    @current_bowler = potential_bowlers.sample
+    @current_bowler = potential_bowlers.sample 
   end
 
   def facing
