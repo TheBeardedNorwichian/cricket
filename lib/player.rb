@@ -15,56 +15,33 @@ class Player < GameComponents
     @bowling_attr = {
         bowling:      bowl_var.to_i
     }
-    @stats_batting = {
-        batted:       false,
-        balls_faced:  0, 
-        dot_balls:    0,  
-        runs_scored:  0,
-        fours_hit:    0,
-        sixes_hit:    0,
-        out:          false,
-        howout:       "Not out",
-        wicket_taker: ""
-      }
-    @stats_bowling = {
-        overs:        0,
-        deliveries:   0, 
-        maidens:      0,
-        runs_scored:  0,
-        wickets:      0,
-        wides:        0,
-        no_balls:     0,
-        runs:         0
-      }
-    @stats_fielding = {
-        catches:      0,
-        stumpings:    0,
-        run_outs:     0
-      }
+    @stats_batting = {}
+    @stats_bowling = {}
+    @stats_fielding = {}
   end
 
-  def strike_rate
-    ((@stats_batting[:runs_scored].to_f / @stats_batting[:balls_faced].to_f) * 100).rnd_2 
+  def strike_rate(innings)
+    ((@stats_batting[innings][:runs_scored].to_f / @stats_batting[innings][:balls_faced].to_f) * 100).rnd_2 
   end
 
-  def economy
-    (@stats_bowling[:runs_scored].to_f / @stats_bowling[:overs].to_f).to_f.rnd_2
+  def economy(innings)
+    (@stats_bowling[innings][:runs_scored].to_f / @stats_bowling[innings][:overs].to_f).to_f.rnd_2
   end
 
 
-  def wicket
-    @stats_batting[:out] = true
+  def wicket(innings)
+    @stats_batting[innings][:out] = true
     @b_runs = 0
   end
 
 #--------------
 #bowling actions
 #--------------
-  def bowl
+  def bowl(innings)
     #needs developing
     #no ball?
     @energy = @energy - 1
-    @stats_bowling[:deliveries] += 1
+    @stats_bowling[innings][:deliveries] += 1
     return @ball = {
       length:    rand(100),
       pitch:     rand(100), 
@@ -76,29 +53,29 @@ class Player < GameComponents
 #batting actions
 #--------------
 #need to think about wicket taking
-  def play(ball)
+  def play(ball, innings)
     @ball_sum = ball[:length] + ball[:pitch] + ball[:speed]
     if @ball_sum > 50
-      hit
+      hit(innings)
       if @b_runs == 0
-        @stats_batting[:dot_balls] += 1
+        @stats_batting[innings][:dot_balls] += 1
       end
     else
-      wicket
+      wicket(innings)
     end
   end
 
-  def hit
+  def hit(innings)
     #catch / caught behind?
     #if hit - run or not?  means run out possible
     @b_runs = random_run_engine(@batting_attr[:batting])
     if @b_runs > 0
-      @stats_batting[:runs_scored] += @b_runs
+      @stats_batting[innings][:runs_scored] += @b_runs
       if @b_runs == 4
-        @stats_batting[:fours_hit] += 1
+        @stats_batting[innings][:fours_hit] += 1
       end
       if @b_runs == 6
-        @stats_batting[:sixes_hit] += 1
+        @stats_batting[innings][:sixes_hit] += 1
       end
     end
   end

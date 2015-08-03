@@ -3,7 +3,8 @@ class Over < GameComponents
   attr_reader :balls, :o_runs, :wickets, :bowler, :ball, 
     :over_id, :score, :innings_over, :ball_in_over, :batting_team
 
-  def initialize(bowler, current_batter_1, current_batter_2, over_id, batting_team, target, score, wickets, fielding_team)
+  def initialize(innings, bowler, current_batter_1, current_batter_2, over_id, batting_team, target, score, wickets, fielding_team)
+    @innings        = innings
     @balls          = []
     @o_runs         = 0
     @wickets        = 0
@@ -19,15 +20,15 @@ class Over < GameComponents
     @ball           = nil
     @innings_over   = false
     @ball_in_over   = nil
-    @bowler.stats_bowling[:overs] += 1
+    @bowler.stats_bowling[@innings][:overs] += 1
   end
 
   def run_over
     over_heading
     @ball_in_over = 1
     while @balls.length < 6 do 
-      @ball = Delivery.new(@ball_in_over, @bowler, @facing_b, @non_striker, @fielding_team)
-      @ball.bowl_ball
+      @ball = Delivery.new(@innings, @ball_in_over, @bowler, @facing_b, @non_striker, @fielding_team)
+      @ball.bowl_ball(@innings)
       @balls << @ball
       runs_in_over
       check_for_wicket 
@@ -48,30 +49,30 @@ class Over < GameComponents
 
   def check_for_maiden
     if @o_runs == 0
-      @bowler.stats_bowling[:maidens] += 1
+      @bowler.stats_bowling[@innings][:maidens] += 1
     end
   end
 
   def check_for_wicket
-    if @ball.facing_batsman.stats_batting[:out] == true
+    if @ball.facing_batsman.stats_batting[@innings][:out] == true
       @wickets += 1
-      how_out(@facing_b, @bowler, @fielding_team)
+      how_out(@facing_b, @bowler, @fielding_team, @innings)
       @total_wickets += 1
       @batting_team.players.each do |batter|
-        if batter.stats_batting[:out] == false && batter.stats_batting[:batted] == false
+        if batter.stats_batting[@innings][:out] == false && batter.stats_batting[@innings][:batted] == false
           @facing_b = batter
-          batter.stats_batting[:batted] = true
+          batter.stats_batting[@innings][:batted] = true
           break
         end
       end
-      @batting_team.score[@total_wickets.to_s.to_sym] = @score
+      #@batting_team.score[@total_wickets.to_s.to_sym] = @score
     end
   end
 
   def check_for_end_of_innings
     total_wickets = 0
     @batting_team.players.each do |batter|
-      if batter.stats_batting[:out] == true
+      if batter.stats_batting[@innings][:out] == true
         total_wickets += 1
       end
     end

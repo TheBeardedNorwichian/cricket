@@ -3,7 +3,7 @@ module Output
   def innings_header
     1.times { puts "" }
     puts "#################################################################"
-    puts "#{@name}"
+    puts "#{@innings_name}"
     puts ""
   end
 
@@ -21,11 +21,11 @@ module Output
     end
   end
 
-  def show_ball
+  def show_ball(innings)
     if Control.details == true
       #end_of_innings_stats
-      puts "  Ball: #{@ball_in_over} - #{show_wicket}     | #{pad_l(@facing_batsman.name,20)} - #{pad_r(@facing_batsman.stats_batting[:runs_scored],3)}"
-      sleep 0.1
+      puts "  Ball: #{@ball_in_over} - #{show_wicket}     | #{pad_l(@facing_batsman.name,20)} - #{pad_r(@facing_batsman.stats_batting[innings][:runs_scored],3)}"
+      sleep 0.3
     end
   end
   
@@ -58,15 +58,15 @@ module Output
     end
   end   
 
-  def end_of_innings_stats
-    batting_stats 
-    fall_of_wicket
-    bowling_stats
+  def end_of_innings_stats(innings)
+    batting_stats(innings)
+    #fall_of_wicket
+    bowling_stats(innings)
   end
 
-  def batting_stats
+  def batting_stats(innings)
     @batted_batters.each do |b|
-      puts "#{pad_l(b.name,20)} - #{pad_l(b.stats_batting[:howout], 25)} #{pad_l(b.stats_batting[:wicket_taker],40)} #{pad_r(b.stats_batting[:runs_scored],3)} | #{pad_r(b.stats_batting[:balls_faced],3)} | #{pad_r(b.strike_rate,6)} | #{pad_r(b.stats_batting[:fours_hit],2)} | #{pad_r(b.stats_batting[:sixes_hit],2)} "
+      puts "#{pad_l(b.name,20)} - #{pad_l(b.stats_batting[innings][:howout], 25)} #{pad_l(b.stats_batting[innings][:wicket_taker],40)} #{pad_r(b.stats_batting[innings][:runs_scored],3)} | #{pad_r(b.stats_batting[innings][:balls_faced],3)} | #{pad_r(b.strike_rate(innings),6)} | #{pad_r(b.stats_batting[innings][:fours_hit],2)} | #{pad_r(b.stats_batting[innings][:sixes_hit],2)} "
     end
     puts ""
     if @wickets == 10
@@ -83,11 +83,11 @@ module Output
     end
   end
 
-  def bowling_stats
+  def bowling_stats(innings)
     puts ""
     puts ""
     @bowled_bowlers.each do |b|
-      puts "#{pad_l(b.name,20)} - #{b.energy} | #{pad_r(b.stats_bowling[:overs],3)} | #{pad_r(b.stats_bowling[:maidens],3)} | #{pad_r(b.stats_bowling[:wickets],2)} | #{pad_r(b.stats_bowling[:runs_scored],3  )} | #{pad_r(b.economy,5)} | #{pad_r(b.stats_bowling[:no_balls],2)} | #{pad_r(b.stats_bowling[:wides],2)}"
+      puts "#{pad_l(b.name,20)} - #{pad_r(b.energy, 4)} | #{pad_r(b.stats_bowling[innings][:overs],3)} | #{pad_r(b.stats_bowling[innings][:maidens],3)} | #{pad_r(b.stats_bowling[:wickets],2)} | #{pad_r(b.stats_bowling[innings][:runs_scored],3  )} | #{pad_r(b.economy(innings),5)} | #{pad_r(b.stats_bowling[innings][:no_balls],2)} | #{pad_r(b.stats_bowling[innings][:wides],2)}"
     end
     puts ""
   end

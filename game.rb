@@ -1,4 +1,10 @@
+$: << File.dirname(__FILE__)
+
 require File.dirname(__FILE__) + '/lib/control'
+
+require 'rubygems'
+require 'bundler'
+Bundler.require(:default)
 
 system('clear')
 system('cls')
